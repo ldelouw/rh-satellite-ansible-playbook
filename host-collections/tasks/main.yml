@@ -1,0 +1,12 @@
+---
+- name: Host collections
+  redhat.satellite.host_collection:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    organization: "{{ organization }}"
+    name: "{{ item }}"
+    state: present
+  loop: "{{ host_collections }}"
+  tags: host_collections
+

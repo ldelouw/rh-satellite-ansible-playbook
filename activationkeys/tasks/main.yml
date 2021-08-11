@@ -1,0 +1,15 @@
+---
+- name: "create activation keys"
+  redhat.satellite.activation_key:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    organization: "{{ organization }}"
+    name: "{{ item.name }}"
+    lifecycle_environment: "{{ item.lifecycle_environment }}"
+    content_view: "{{ item.content_view }}"
+    #subscriptions: "{{ item.subscriptions }}"
+    #content_overrides: "{{ item.content_overrides }}"
+  loop: "{{ activation_keys }}"
+  tags: activation_keys
+

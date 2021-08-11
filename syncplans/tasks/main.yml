@@ -1,0 +1,14 @@
+---
+- name: "Create or update weekly RHEL sync plan"
+  redhat.satellite.sync_plan:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    organization: "{{ organization }}"
+    name: "{{ sync_plan }}"
+    interval: "{{ sync_interval }}"
+    enabled: true
+    sync_date: "2020-01-01 01:04:00 UTC"
+    products: "{{ products }}"
+    state: present
+  tags: sync_plans

@@ -1,0 +1,12 @@
+---
+- name: Define domains
+  redhat.satellite.domain:
+    name: "{{ item.name }}"
+    locations: "{{ item.locations }}"
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    organizations: "{{ organization }}"
+  loop: "{{ domains }}"
+  tags: domains
+

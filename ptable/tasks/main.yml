@@ -1,0 +1,18 @@
+---
+- name: "Copy partition table to Satellite" 
+  copy:
+    src: "files/01-kickstart-default-ptable.erb"
+    dest: /root/01-kickstart-default-ptable.erb
+
+- name: "Create Partition Template 01-kickstart-default-ptable"
+  redhat.satellite.partition_table:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    organizations: "{{ organization }}"
+    name: 01-kickstart-default
+    file_name: ~/01-kickstart-default-ptable.erb
+    os_family: Redhat
+    state: present
+    locations: "{{ locations }}"
+  tags: ptable

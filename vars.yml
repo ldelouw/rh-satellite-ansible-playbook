@@ -1,0 +1,283 @@
+# Satellite URL and hostname
+sat_url: "https://sat6.example.com"
+sat_hostname: sat6.example.com
+
+# Reserved for future usage
+capules:
+- capsule1.example.com
+- capsule2.example.com
+
+# Needs to be a user with the admin role
+sat_user: "admin"
+
+# Please see passwd.yml ansible vault file
+# sat_passwd: some-pass
+
+# If you provided another location during the Satellite installation, change it
+organization: "Default Organization"
+
+# Whatever locations are used in you organization. This locations also need to 
+# be changed in other placed in this file
+locations:
+  - NUE
+  - BER
+
+# Change this to True if you made an inital sync of all repositories, this
+# is a manual task as it can take multiple hours to complete
+synced: False
+
+# Proxy stuff is Optional. If not set, it will be ignored
+# Default Proxy and user to be used to sync content from Red Hat CDN
+#
+# default_http_proxy_url: "http://proxy.example.com:3128"
+# default_http_proxy_user: proxy_user
+# default_http_proxy_passwd: See passwd.yml vault file
+
+# This defines if the packages should be downloaded immediately or on demand. 
+# Possible values on_demand, which is the default, and immediate
+rh_repo_download_policy: on_demand
+
+# This defines if the packages should be downloaded immediately or on demand. 
+# Possible values on_demand, which is the default, and immediate
+custom_repo_download_policy: on_demand
+
+# This defines if capsules should download content immediately or on demand on 
+# syncing content. Default is on_demand
+capsule_repo_download_policy: on_demand
+
+# Compute resource stuff
+libvirt_hv: "qemu+ssh://user@libvirt.example.com/system"
+libvirt_hypervisor_name: libvirt-hypervisor
+libvirt_disksize: 20G
+libvirt_nic: br100
+
+# Define Domains
+
+domains:
+  - { name: "example.com", locations: "BER" }
+  - { name: "example.net", locations: "BER,NUE" }
+
+# Define Subnets
+subnets:
+  - { name: "vlan100", network: "192.168.100.0", mask: "255.255.255.0", gateway: "192.168.100.1", dns_primary: "192.168.100.1", domains: "example.com", from_ip: "192.168.100.100", to_ip: "192.168.100.200", boot_mode: "Static", tftp_proxy: "sat6.example.com" } 
+  - { name: "vlan101", network: "192.168.101.0", mask: "255.255.255.0", gateway: "192.168.101.1", dns_primary: "192.168.101.1", domains: "example.net", from_ip: "192.168.101.100", to_ip: "192.168.101.200", boot_mode: "Static", tftp_proxy: "sat6.example.com" } 
+
+
+# Red Hat Repositories to be enabled
+# Instructions:
+#
+# - Only provide a releasever, if the repo contains more than one 
+#   minor release. This is i.e. the case with the 
+#   rhel-7-server-satellite-tools-6.7-rpms repo
+#
+# - Only provide a base architecure where there is more than one arch available
+#   This is the case with RHEL7, but not with RHEL8
+#
+
+# Define products
+products:
+    # RHEL 8
+- "Red Hat Enterprise Linux for x86_64"
+  # RHEL 7
+#- "Red Hat Enterprise Linux Server"
+#- "Red Hat Ansible Engine"
+#- "Red Hat Software Collections (for RHEL Server)"
+#- "Red Hat Enterprise Linux High Availability for x86_64"
+#- "Red Hat Enterprise Linux for SAP Applications for x86_64"
+
+redhat_kickstart_repos:
+#- label: "rhel-7-server-kickstart"
+#  repos:
+#  - { releasever: "7.7", basearch: "x86_64" }
+#  - { releasever: "7.8", basearch: "x86_64" }
+
+- label: "rhel-8-for-x86_64-baseos-kickstart"
+  repos:
+  - { releasever: "8.3" }
+  - { releasever: "8.4" }
+
+- label: "rhel-8-for-x86_64-appstream-kickstart"
+  repos:
+  - { releasever: "8.3" }
+  - { releasever: "8.4" }
+
+redhat_os_repos:
+#- label: rhel-7-server-rpms
+#  repos:
+#    - { releasever: "7Server", basearch: "x86_64" }
+
+#- label:  "rhel-7-server-optional-rpms"
+#  repos:
+#    - { releasever: "7Server", basearch: "x86_64" }
+
+#- label:  "rhel-sap-for-rhel-7-server-rpms"
+#  repos:
+#    - { releasever: "7Server", basearch: "x86_64" }
+
+#- label:  "rhel-ha-for-rhel-7-server-rpms"
+#  repos:
+#    - { releasever: "7Server", basearch: "x86_64" }
+
+#- label:  "rhel-7-server-extras-rpms"
+#  repos:
+#    - { basearch: "x86_64" }
+
+#- label:  "rhel-7-server-supplementary-rpms"
+#  repos:
+#    - { releasever: "7Server", basearch: "x86_64" }
+
+#- label: "rhel-7-server-satellite-tools-6.7-rpms"
+#  repos:
+#    - { basearch: "x86_64" }
+
+#- label: "rhel-7-server-eus-rpms"
+#  repos:
+#    - { releasever: "7.7", basearch: "x86_64" }
+
+#- label: "rhel-ha-for-rhel-7-server-eus-rpms"
+#  repos:
+#    - { releasever: "7.7", basearch: "x86_64" }
+
+#- label: "rhel-7-server-eus-supplementary-rpms"
+#  repos:
+#    - { releasever: "7.7", basearch: "x86_64" }
+
+#- label: "rhel-8-for-x86_64-appstream-eus-rpms"
+#  repos:
+#    - { releasever: "8.3" }
+
+#- label: "rhel-8-for-x86_64-baseos-eus-rpms"
+#  repos:
+#    - { releasever: "8.4" }
+
+- label: "rhel-8-for-x86_64-baseos-rpms"
+  repos:
+    - { releasever: "8" }
+
+- label: "rhel-8-for-x86_64-appstream-rpms"
+  repos:
+    - { releasever: "8" }
+
+- label: "rhel-8-for-x86_64-highavailability-rpms"
+  repos:
+    - { releasever: "8" }
+
+- label: "satellite-tools-6.9-for-rhel-8-x86_64-rpms"
+  repos:
+    - { }
+
+#redhat_app_repos:
+#- label: rhel-7-server-ansible-2.8-rpms
+#  repos:
+#    - {  basearch: "x86_64" }
+
+#- label: rhel-7-server-satellite-maintenance-6-rpms
+#  repos:
+#    - { basearch: "x86_64" }
+
+#- label: rhel-server-rhscl-7-rpms
+#  repos:
+#    - { releasever: "7Server", basearch: "x86_64" }
+
+# Define an interval for the sync plan
+sync_plan: daily
+sync_interval: daily
+
+# This can be used for 3rd party repos. the prefix will be the Organizations
+# name, custom can be used for homegrown software or homemade RPMs,
+# oss can be used for i.e. EPEL, proprietary for closed source software RPMs 
+# provided by a software vendor
+additional_products:
+  - name: "{{ organization }}_custom"
+  - name: "{{ organization }}_oss"
+  - name: "{{ organization }}_proprietary"
+
+additional_repos:
+#  - name: "epel7"
+#    url: "https://ftp.tu-chemnitz.de/pub/linux/fedora-epel/7/x86_64/"
+#    product: "{{ organization }}_oss" 
+
+# Please change the EPEL URL to you closest mirror server
+  - name: "epel8"
+    url: "https://ftp.tu-chemnitz.de/pub/linux/fedora-epel/8/Everything/x86_64/"
+    product: "{{ organization }}_oss" 
+
+# Define content views
+content_views:
+#- name: "cv-rhel7-x86_64"
+#  repositories:
+#    - { name: "Red Hat Enterprise Linux 7 Server - Extras RPMs x86_64", product: "Red Hat Enterprise Linux Server" }
+#    - { name: "Red Hat Enterprise Linux 7 Server Kickstart x86_64 7.8", product: "Red Hat Enterprise Linux Server" }
+#    - { name: "Red Hat Enterprise Linux 7 Server - Supplementary RPMs x86_64 7Server", product: "Red Hat Enterprise Linux Server" }
+#    - { name: "Red Hat Enterprise Linux for SAP RHEL 7 Server RPMs x86_64 7Server", product: "Red Hat Enterprise Linux for SAP Applications for x86_64" }
+#    - { name: "Red Hat Enterprise Linux 7 Server - Optional RPMs x86_64 7Server", product: "Red Hat Enterprise Linux Server" }
+#    - { name: "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server", product: "Red Hat Enterprise Linux Server" }
+#    - { name: "Red Hat Enterprise Linux High Availability for RHEL 7 Server RPMs x86_64 7Server", product: "Red Hat Enterprise Linux High Availability for x86_64" }
+#    - { name: "Red Hat Satellite Tools 6.7 for RHEL 7 Server RPMs x86_64", product: "Red Hat Enterprise Linux Server" }
+#    - { name: "Red Hat Software Collections RPMs for Red Hat Enterprise Linux 7 Server x86_64 7Server", product: "Red Hat Software Collections (for RHEL Server)" }
+#
+- name: "cv-rhel8-x86_64"
+  repositories:
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS Kickstart 8.4', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream Kickstart 8.4', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS RPMs 8', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream RPMs 8', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Satellite Tools 6.9 for RHEL 8 x86_64 RPMs', product: 'Red Hat Enterprise Linux for x86_64' }
+
+# Define Composite content views
+ccv:
+- name: 'ccv-rhel8-x86_64-generic'
+  cv:
+    - 'cv-rhel8-x86_64'
+
+# Define host collections
+host_collections:
+- rhel8
+- dev_servers
+- prod_servers
+
+# Define Hostgroups
+hostgroups:
+- name: "BER"
+  locations: "BER"
+  content_source: "{{ sat_hostname }}"
+
+- name: "prod"
+  parent: "BER"
+  locations: "BER"
+
+- name: "sap"
+  parent: "BER/prod"
+  locations: "BER"
+
+- name: "rhel8"
+  parent: "BER/prod/sap"
+  locations: "BER"
+  architecture: "x86_64"
+  operatingsystem: "RedHat 8.4"
+  ptable: 01-kickstart-default
+  lifecycle_environment: prod
+  content_source: "{{ sat_hostname }}"
+  content_view: ccv-rhel8-x86_64-generic
+
+- name: generic
+  parent: "BER/prod"
+  location: "BER"
+  architecture: x86_64
+  ptable: 01-kickstart-default
+  lifecycle_environment: prod
+
+- name: rhel8
+  parent: "BER/prod/generic"
+  location: "BER"
+  architecture: x86_64
+  operatingsystem: "RedHat 8.4"
+  ptable: 01-kickstart-default
+  lifecycle_environment: prod
+  content_view: ccv-rhel8-x86_64-generic
+
+ 
+# Define activation keys
+activation_keys:
+- { name: "ak-rhel8-generic-test", lifecycle_environment: "test", content_view: "ccv-rhel8-x86_64-generic", content_overrides: "satellite-tools-6.9-for-rhel-8-x86_64-rpms" }
+

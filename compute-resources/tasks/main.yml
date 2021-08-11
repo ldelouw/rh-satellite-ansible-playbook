@@ -1,0 +1,72 @@
+---
+- name: Create livirt compute resource
+  redhat.satellite.compute_resource:
+    name: "{{ libvirt_hypervisor_name }}"
+    locations: "{{ locations }}"
+    organizations: "{{ organization }}"
+    provider: libvirt
+    provider_params:
+      url: '{{ libvirt_hv }}'
+      display_type: spice
+      set_console_password: no
+    server_url: "{{ sat_url }}"
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    state: present
+  tags: compute_resource
+
+- name: Set SELinux to permissive, Sat 6.9 libvirt permissions are broken
+  selinux:
+    policy: targeted
+    state: permissive
+  tags: public_key
+
+- name: Install the libvirt-client package
+  yum:
+    name:  libvirt-client
+    disable_plugin: foreman-protector
+    state: present 
+  tags: public_key
+
+- name: Create temporary direcotory
+  file:
+    path: /usr/share/foreman/.ansible/tmp
+    owner: foreman
+    state: directory
+  tags: public_key
+
+- name: Create SSH Keypair for the foreman user
+  become: yes
+  become_user: foreman
+  become_method: su
+  become_flags: '-s /bin/bash'
+  openssh_keypair:
+    path: "~/.ssh/id_rsa"
+  register: public_key
+  tags: public_key
+
+- name: "Compute profile test"
+  redhat.satellite.compute_profile:
+    #name: "1-Small"
+    name: "test"
+    compute_attributes:
+    - compute_resource: "{{ libvirt_hypervisor_name }}"
+      vm_attrs:
+        volume_attributes:
+          0: 
+            pool_name: "default"
+            #capacity: "{{ libvirt_disksize }}"
+            #allocation: "{{ libvirt_disksize }}"
+            capacity: "30G"
+            allocation: "30G"
+            format_type: raw
+        nics_attributes:
+          0: 
+            type: bridge
+            bridge: "{{ libvirt_nic }}"
+
+    server_url: "{{ sat_url }}"
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    state: present
+  tags: compute_profile

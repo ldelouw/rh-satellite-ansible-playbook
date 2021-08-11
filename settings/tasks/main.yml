@@ -1,0 +1,48 @@
+---
+- name: Set default proxy to be used
+  redhat.satellite.setting:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    name: "http_proxy"
+    value: "{{ default_http_proxy_url }}"
+  when: default_http_proxy_url is defined
+  tags: 
+    - proxy
+    - settings
+
+- name: Set download policy for RH repos to "{{ rh_repo_download_policy }}"
+  redhat.satellite.setting:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    name: "default_redhat_download_policy"
+    value: "{{ rh_repo_download_policy }}"
+  when: rh_repo_download_policy is defined
+  tags: 
+    - download_policy
+    - settings
+
+- name: Set download policy for custom repos to "{{ custom_repo_download_policy }}"
+  redhat.satellite.setting:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    name: "default_download_policy"
+    value: "{{ custom_repo_download_policy }}"
+  when: custom_repo_download_policy is defined
+  tags: 
+    - download_policy
+    - settings
+
+- name: Set download policy for capsules to "{{ capsule_repo_download_policy }}"
+  redhat.satellite.setting:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    name: "default_proxy_download_policy"
+    value: "{{ capsule_repo_download_policy }}"
+  when: capsule_repo_download_policy is defined
+  tags: 
+    - download_policy
+    - settings

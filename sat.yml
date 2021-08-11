@@ -1,0 +1,58 @@
+- hosts: all
+  vars_files:
+  - vars.yml
+  - passwd.yml
+
+  collections:
+    - redhat.satellite
+
+  
+  roles: 
+    - role: redhat.satellite.manifest
+      vars:
+        satellite_server_url: "{{ sat_url }}"
+        satellite_username: "{{ sat_user }}"
+        satellite_password: "{{ sat_passwd }}"
+        satellite_organization: "{{ organization }}"
+        satellite_manifest_path: "~/manifest.zip"
+      tags: manifest
+
+#    - role: manifest # That is not working due to a bug
+    - role: firewalld
+      tags: firewalld
+    - role: locations
+    - role: proxy
+    - role: settings
+    - role: syncplans
+      tags: syncplans
+    - role: repos
+      tags: repos
+    - role: environments
+      tags: environments
+    - role: content-views
+      tags: content-views
+    - role: activationkeys
+      tags: activation_keys
+    - role: host-collections
+      tags: host-collections
+    - role: ptable
+      tags: ptable
+    - role: os
+      tags: os
+    - role: domains
+      tags: domains
+    - role: subnets
+      tags: subnets
+    # - role: compute-resources
+    #   tags: compute-resources
+    - role: hostgroups
+      tags: hostgroups
+    - role: activationkeys
+      tags: activationkeys
+
+  pre_tasks:
+    - name: Copy manifest to target Satellite
+      copy:
+        src: "~/manifest.zip"
+        dest: /root/manifest.zip
+ 

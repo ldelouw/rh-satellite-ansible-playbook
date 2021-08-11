@@ -1,0 +1,26 @@
+<%#
+kind: ptable
+name: Kickstart default
+model: Ptable
+oses:
+- CentOS
+- Fedora
+- RedHat
+%>
+zerombr
+clearpart --all --initlabel
+
+part /boot      --fstype ext2 --size=512 --ondisk=vda
+part pv.0       --size=1 --grow --ondisk=vda
+
+volgroup vg_<%= @host.shortname%> pv.0
+
+logvol /              --name=lv_root   --vgname=vg_<%= @host.shortname%> --size=4096
+logvol /home          --name=lv_home   --vgname=vg_<%= @host.shortname%> --size=512 --fsoption=nosuid,nodev
+logvol /tmp           --name=lv_tmp    --vgname=vg_<%= @host.shortname%> --size=512 --fsoption=nosuid,nodev,noexec
+logvol /var           --name=lv_var    --vgname=vg_<%= @host.shortname%> --size=<%= host_param('lv_var') || '2048' %> --fsoption=nosuid,nodev
+logvol /var/log       --name=lv_var_log --vgname=vg_<%= @host.shortname%> --size=1024 --fsoption=nosuid,nodev
+logvol /var/log/audit --name=lv_var_log_audit   --vgname=vg_<%= @host.shortname%> --size=1024 --fsoption=nosuid,nodev
+logvol swap  --fstype="swap" --size=<%= host_param('lv_swap') || '1024' %> --name=lv_swap --vgname=vg_<%= @host.shortname%>
+
+

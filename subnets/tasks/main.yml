@@ -1,0 +1,19 @@
+---
+- name: Manage Subnets
+  redhat.satellite.subnet:
+    name: "{{ item.name }}"
+    network: "{{ item.network }}"
+    mask: "{{ item.mask }}"
+    gateway: "{{ item.gateway }}"
+    domains: "{{ item.domains }}"
+    dns_primary: "{{ item.dns_primary }}"
+    from_ip: "{{ item.from_ip }}"
+    to_ip: "{{ item.to_ip }}"
+    boot_mode: "{{ item.boot_mode }}"
+    tftp_proxy: "{{ item.tftp_proxy }}"
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    locations: "{{ locations }}"
+  loop: "{{ subnets }}"
+  tags: subnets

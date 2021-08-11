@@ -1,0 +1,19 @@
+---
+- name: Hostgroups
+  redhat.satellite.hostgroup:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    organization: "{{ organization }}"
+    name: "{{ item.name }}"
+    parent: "{{ item.parent|default(omit) }}"
+    architecture: "{{ item.architecture|default(omit) }}"
+    operatingsystem: "{{ item.operatingsystem|default(omit) }}"
+    ptable: "{{ item.ptable|default(omit) }}"
+    lifecycle_environment: "{{ item.lifecycle_environment|default(omit) }}"
+    content_view: "{{ item.content_view|default(omit) }}"
+    content_source: "{{ item.content_source|default(omit) }}"
+    medium: "{{ item.medium|default(omit) }}"
+    locations: "{{ item.locations|default(omit) }}"
+  loop: "{{ hostgroups }}"
+  tags: hostgroups

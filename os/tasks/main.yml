@@ -1,0 +1,17 @@
+---
+- name: "Ensure OS 8.4 configured"
+  redhat.satellite.operatingsystem:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    name: "RedHat"
+    family: Redhat
+    major: 8
+    minor: 4
+    ptables: 
+    - 01-kickstart-default
+    - "Kickstart default"
+    password_hash: SHA256
+    #state: present_with_defaults
+    state: present
+  tags: os

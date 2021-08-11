@@ -1,0 +1,54 @@
+---
+- name: "Enable Red Hat Kickstart repositories"
+  redhat.satellite.repository_set:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    organization: "{{ organization }}"
+    label: "{{ item.label }}"
+    state: enabled
+    repositories: "{{ item.repos }}"
+  loop: "{{ redhat_kickstart_repos }}"
+  tags: enable_redhat_kickstart_repos
+
+- name: "Enable Red Hat OS repositories"
+  redhat.satellite.repository_set:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    organization: "{{ organization }}"
+    label: "{{ item.label }}"
+    state: enabled
+    repositories: "{{ item.repos }}"
+  loop: "{{ redhat_os_repos }}"
+  tags: enable_redhat_os_repos
+
+- name: 3rd Party products
+  redhat.satellite.product:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    organization: "{{ organization }}"
+    name: "{{ item.name }}"
+    sync_plan: "{{ sync_plan }}"
+    state: present
+  loop: "{{ additional_products }}"
+  tags: 3rd_party_products
+
+- name: "3rd Party repos"
+  redhat.satellite.repository:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    organization: "{{ organization }}"
+    name: "{{ item.name }}"
+    content_type: "yum"
+    url: "{{ item.url|default(omit) }}"
+    http_proxy_policy: "{{ item.http_proxy_policy|default(omit) }}"
+    gpg_key: "{{ item.gpg_key|default(omit) }}"
+    product: "{{ item.product }}"
+    mirror_on_sync: false
+    download_policy: "immediate"
+  loop: "{{ additional_repos }}"
+  tags: 3rd_party_repos
+

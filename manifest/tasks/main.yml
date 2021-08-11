@@ -1,0 +1,10 @@
+---
+- name: "Upload the manifest"
+  redhat.satellite.subscription_manifest:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    organization: "Default Organization"
+    state: present
+    manifest_path: "files/manifest.zip"
+  tags: manifest

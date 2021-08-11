@@ -1,0 +1,25 @@
+---
+- name: "Add a test lifecycle environment"
+  redhat.satellite.lifecycle_environment:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    name: "test"
+    label: "test"
+    organization: "{{ organization }}"
+    prior: "Library"
+    description: "test"
+    state: "present"
+
+- name: "Add a prod lifecycle environment"
+  redhat.satellite.lifecycle_environment:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    name: "prod"
+    label: "prod"
+    organization: "{{ organization }}"
+    prior: "test"
+    description: "prod"
+    state: "present"
+
