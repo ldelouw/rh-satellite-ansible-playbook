@@ -1,4 +1,4 @@
-# This is a playbook to set up a Satellite 6
+# This is a playbook to set up a Satellite 6 server
 
 ## Author, Copyright and License
 This playbook is created by Luc de Louw <luc@delouw.ch>, <ldelouw@redhat.com>. It is free software licensed under the terms of the GNU General Public License GPL v3 or later. A copy of the license can be obtained here: http://www.gnu.org/licenses/gpl-3.0.html
@@ -20,7 +20,7 @@ At the moment, the Playbook covers the most important topics for getting a Satel
 For security reasons (I dont want to accidentially leak some real life credentials)
 * Register and subscribe the Satellite to Redhat CDN
 * Setting up an IPA Realm
-* Setting up a libvirt compute resource, however an example is provided but commented out
+* Setting up a libvirt compute resource, however, an example is provided but commented out
 
 For technical reasons
 * Running the Satellite installer (Just takes too long to execute and brings no benefit)
@@ -37,6 +37,7 @@ To be done
 * More general settings
 * IPA/Kerberos authentication
 * Remove "Default Location"
+* Configuring Capsule servers
 
 ## How to use
 First of all, edit the vars.yml file, replace everything with sat6.example.com 
