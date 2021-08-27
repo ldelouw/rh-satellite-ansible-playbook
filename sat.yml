@@ -23,10 +23,10 @@
     - role: locations
     - role: proxy
     - role: settings
-    - role: syncplans
-      tags: syncplans
     - role: repos
       tags: repos
+    - role: syncplans
+      tags: syncplans
     - role: environments
       tags: environments
     - role: content-views
@@ -43,8 +43,8 @@
       tags: domains
     - role: subnets
       tags: subnets
-    # - role: compute-resources
-    #   tags: compute-resources
+#    - role: compute-resources
+#      tags: compute-resources
     - role: hostgroups
       tags: hostgroups
     - role: activationkeys

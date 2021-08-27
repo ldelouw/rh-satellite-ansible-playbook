@@ -27,7 +27,7 @@ For technical reasons
 * Anything that has to do with Puppet, as Puppet ist depricated in Satellite 6
 
 For the sake of lazyness
-* Using more than on Organisations, if you are using more than one Org, please use
+* Using more than one Organisation. If you are using more than one Org, please use
   multiple vars.yml files per Org.
 
 To be done
@@ -43,9 +43,9 @@ To be done
 First of all, edit the vars.yml file, replace everything with example.com 
 with your real life environment. Please also read the comments for better understanding
 
-Alter that the passwd.yml vault password needs to be changed with *ansible-vault rekey passwd.yml*, the password is *changeme*. Edit the passwd.yml file with *ansible-vault edit passwd.yml* and use your real Satellite password and if needed uncomment the default_http_proxy_passwd and change to the real world Proxy password
+Alter that, the passwd.yml vault password needs to be changed with *ansible-vault rekey passwd.yml*, the password is *changeme*. Edit the passwd.yml file with *ansible-vault edit passwd.yml* and use your real Satellite password and if needed uncomment the default_http_proxy_passwd and change to the real world Proxy password
 
-Afterwards just run it with *ansible-play sat6.yml --ask-vault*
+Then, simply run it with *ansible-play sat6.yml --ask-vault*
 
 Note: It's recommended to have some basic Ansible knowledge to operate this playbook.
 
