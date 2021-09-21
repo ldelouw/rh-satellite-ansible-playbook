@@ -191,6 +191,12 @@ sync_interval: daily
 # name, custom can be used for homegrown software or homemade RPMs,
 # oss can be used for i.e. EPEL, proprietary for closed source software RPMs 
 # provided by a software vendor
+#
+gpg_keys:
+- { name: "RPM-GPG-KEY-EPEL", url: "https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL" }
+- { name: "RPM-GPG-KEY-EPEL-8", url: "https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-8" }
+
+
 additional_products:
   - name: "{{ organization }}_custom"
   - name: "{{ organization }}_oss"
@@ -205,7 +211,7 @@ additional_repos:
   - name: "epel8"
     url: "https://ftp.tu-chemnitz.de/pub/linux/fedora-epel/8/Everything/x86_64/"
     product: "{{ organization }}_oss" 
-#    gpg_key: sample_gpg_key_as_defined_in_content_credentials
+    gpg_key: RPM-GPG-KEY-EPEL-8
 
 # Define content views
 content_views:
