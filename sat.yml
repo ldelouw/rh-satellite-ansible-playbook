@@ -23,10 +23,10 @@
     - role: locations
     - role: proxy
     - role: settings
-    - role: repos
-      tags: repos
     - role: syncplans
       tags: syncplans
+    - role: repos
+      tags: repos
     - role: environments
       tags: environments
     - role: content-views

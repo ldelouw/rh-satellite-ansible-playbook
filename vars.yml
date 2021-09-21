@@ -108,7 +108,7 @@ redhat_os_repos:
 
 #- label:  "rhel-7-server-optional-rpms"
 #  repos:
-#    - { releasever: "7Server", basearch: "x86_64" }
+    - { releasever: "7Server", basearch: "x86_64" }
 
 #- label:  "rhel-sap-for-rhel-7-server-rpms"
 #  repos:
@@ -142,6 +142,10 @@ redhat_os_repos:
 #  repos:
 #    - { releasever: "7.7", basearch: "x86_64" }
 
+#- label: "rhel-7-server-satellite-capsule-6.9-rpms"
+#  repos:
+#     - { basearch: "x86_64" }
+
 #- label: "rhel-8-for-x86_64-appstream-eus-rpms"
 #  repos:
 #    - { releasever: "8.3" }
@@ -164,7 +168,7 @@ redhat_os_repos:
 
 - label: "satellite-tools-6.9-for-rhel-8-x86_64-rpms"
   repos:
-    - { }
+    - {  }
 
 #redhat_app_repos:
 #- label: rhel-7-server-ansible-2.8-rpms
