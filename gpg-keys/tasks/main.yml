@@ -1,0 +1,30 @@
+---
+- name: "Create GPG keys"
+  redhat.satellite.content_credential:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    organization: "{{ organization }}"
+    name: "{{ item.name}}"
+    content_type: gpg_key
+    #content: "{{ lookup('file', 'RPM-GPG-KEY-my-repo') }}"
+    content: "{{ lookup('url', '{{ item.url }}' ) }}"
+  loop: "{{ gpg_keys }}"
+  environment: 
+    - http_proxy: "{{ default_http_proxy_url }}"
+    - https_proxy: "{{ default_http_proxy_url }}"
+  when: default_http_proxy_url is defined
+
+- name: "Create GPG keys"
+  redhat.satellite.content_credential:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    organization: "{{ organization }}"
+    name: "{{ item.name}}"
+    content_type: gpg_key
+    #content: "{{ lookup('file', 'RPM-GPG-KEY-my-repo') }}"
+    content: "{{ lookup('url', '{{ item.url }}' ) }}"
+  loop: "{{ gpg_keys }}"
+  when: default_http_proxy_url is undefined
+
