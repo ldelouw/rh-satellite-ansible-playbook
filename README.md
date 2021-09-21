@@ -38,6 +38,8 @@ To be done
 * IPA/Kerberos authentication
 * Remove "Default Location"
 * Configuring Capsule servers
+* Configuring GPG keys from files
+* Sample for GPG key handling in repos
 
 ## How to use
 First of all, edit the vars.yml file, replace everything with example.com 

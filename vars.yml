@@ -205,6 +205,7 @@ additional_repos:
   - name: "epel8"
     url: "https://ftp.tu-chemnitz.de/pub/linux/fedora-epel/8/Everything/x86_64/"
     product: "{{ organization }}_oss" 
+#    gpg_key: sample_gpg_key_as_defined_in_content_credentials
 
 # Define content views
 content_views:
