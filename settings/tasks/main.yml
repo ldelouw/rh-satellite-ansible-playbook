@@ -11,6 +11,18 @@
     - proxy
     - settings
 
+- name: Set default content proxy to be used
+  redhat.satellite.setting:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    name: "content_default_http_proxy"
+    value: default_http_proxy
+  when: default_http_proxy_url is defined
+  tags: 
+    - proxy
+    - settings
+
 - name: Set download policy for RH repos to "{{ rh_repo_download_policy }}"
   redhat.satellite.setting:
     username: "{{ sat_user }}"
