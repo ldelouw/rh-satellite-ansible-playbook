@@ -23,6 +23,8 @@
     - role: locations
     - role: proxy
     - role: settings
+    - role: gpg-keys
+      tags: gpg-keys
     - role: syncplans
       tags: syncplans
     - role: repos
