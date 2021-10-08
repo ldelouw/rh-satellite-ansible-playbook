@@ -108,7 +108,7 @@ redhat_os_repos:
 
 #- label:  "rhel-7-server-optional-rpms"
 #  repos:
-    - { releasever: "7Server", basearch: "x86_64" }
+#    - { releasever: "7Server", basearch: "x86_64" }
 
 #- label:  "rhel-sap-for-rhel-7-server-rpms"
 #  repos:
