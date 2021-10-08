@@ -14,7 +14,7 @@ sat_user: "admin"
 # sat_passwd: some-pass
 
 # If you provided another location during the Satellite installation, change it
-organization: "Default Organization"
+organization: "lab"
 
 # Whatever locations are used in you organization. This locations also need to 
 # be changed in other placed in this file

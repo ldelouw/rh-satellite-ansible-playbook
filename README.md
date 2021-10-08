@@ -14,6 +14,12 @@ it's just for the initial configuration
 ## Things covered in this playbook
 At the moment, the Playbook covers the most important topics for getting a Satellite up and running
 
+## Prerequisites
+
+Satellite Installer was run with the enabledment of the TFTP feature:
+*satellite-installer --scenario satellite --foreman-initial-organization=lab --foreman-proxy-tftp=true*
+
+
 
 ## Things *NOT* set up:
 
@@ -31,6 +37,7 @@ For the sake of lazyness
   multiple vars.yml files per Org.
 
 To be done
+* Working firewalld role, current implementation is incomplete
 * More sophisticated activation key configuration such as subs and repo overrides
 * Creating a Letsencrypt cerfiicate using certbot
 * More general settings
