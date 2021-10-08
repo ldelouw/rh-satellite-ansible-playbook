@@ -3,7 +3,7 @@
     msg: "Please proceed with a manual initial sync of the repos. When the    
         sync is done, provide the \"synced=true\" parameter in the            
         --extra-vars or in the vars.yml file. Re-run the playbook to continue"
-  when: synced is False
+  when: synced is not defined
 
 - name: "Content Views (w/o Composite Content views)"
   redhat.satellite.content_view:

@@ -24,7 +24,7 @@ locations:
 
 # Change this to True if you made an inital sync of all repositories, this
 # is a manual task as it can take multiple hours to complete
-synced: False
+#synced: True
 
 # Proxy stuff is Optional. If not set, it will be ignored
 # Default Proxy and user to be used to sync content from Red Hat CDN
