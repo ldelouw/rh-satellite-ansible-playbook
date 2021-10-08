@@ -15,3 +15,8 @@
     - "53/udp"
     - "67/udp"
     - "69/udp"
+
+- name: Reload firewalld
+  command: firewall-cmd --reload
+  
+  
