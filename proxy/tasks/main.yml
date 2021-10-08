@@ -14,3 +14,4 @@
     state: present
   loop: "{{ locations }}"
   tags: proxy
+  when: default_http_proxy_url is defined
