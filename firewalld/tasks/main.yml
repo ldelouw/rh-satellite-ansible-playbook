@@ -1,12 +1,17 @@
 ---
 - firewalld:
     zone: public
-    service: http
+    port: "{{ item }}"
     permanent: yes
     state: enabled
-
-  firewalld:
-    zone: public
-    service: https
-    permanent: yes
-    state: enabled
+  loop:
+    - "80/tcp"
+    - "443/tcp"
+    - "5647/tcp"
+    - "8000/tcp"
+    - "8140/tcp"
+    - "9090/tcp"
+    - "5000/tcp"
+    - "53/udp"
+    - "67/udp"
+    - "69/udp"

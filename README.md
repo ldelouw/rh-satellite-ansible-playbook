@@ -31,7 +31,6 @@ For the sake of lazyness
   multiple vars.yml files per Org.
 
 To be done
-* Working firewalld role, current implementation is incomplete
 * More sophisticated activation key configuration such as subs and repo overrides
 * Creating a Letsencrypt cerfiicate using certbot
 * More general settings
