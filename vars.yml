@@ -59,8 +59,8 @@ domains:
 
 # Define Subnets
 subnets:
-  - { name: "vlan100", network: "192.168.100.0", mask: "255.255.255.0", gateway: "192.168.100.1", dns_primary: "192.168.100.1", domains: "example.com", from_ip: "192.168.100.100", to_ip: "192.168.100.200", boot_mode: "Static", tftp_proxy: "sat6.example.com" } 
-  - { name: "vlan101", network: "192.168.101.0", mask: "255.255.255.0", gateway: "192.168.101.1", dns_primary: "192.168.101.1", domains: "example.net", from_ip: "192.168.101.100", to_ip: "192.168.101.200", boot_mode: "Static", tftp_proxy: "sat6.example.com" } 
+  - { name: "vlan100", network: "192.168.100.0", mask: "255.255.255.0", gateway: "192.168.100.1", dns_primary: "192.168.100.1", domains: "example.com", from_ip: "192.168.100.100", to_ip: "192.168.100.200", boot_mode: "Static", tftp_proxy: "{{ sat_hostname }}" } 
+  - { name: "vlan101", network: "192.168.101.0", mask: "255.255.255.0", gateway: "192.168.101.1", dns_primary: "192.168.101.1", domains: "example.net", from_ip: "192.168.101.100", to_ip: "192.168.101.200", boot_mode: "Static", tftp_proxy: "{{ sat_hostname }}" } 
 
 
 # Red Hat Repositories to be enabled
