@@ -14,9 +14,17 @@ it's just for the initial configuration
 ## Things covered in this playbook
 At the moment, the Playbook covers the most important topics for getting a Satellite up and running
 
+## Compatibility
+This version of the playbook was tested to be working with Satellite Version 6.8 and 6.9.
+
+The current beta version of 6.10 is not compatible, an error is thrown: *fatal: [localhost]: FAILED! => {"msg": "'satellite_hostgroups' is undefined"}* At the moment, host groups must be added manually in 6.10.
+
+Workaround: Run the playbook as following: *ansible-playbook --ask-vault sat.yml --skip-tags=hostgroups* 
+
 ## Prerequisites
 * Subscribe the system, add the required repositories as described in the document https://access.redhat.com/documentation/en-us/red_hat_satellite/6.9/html-single/installing_satellite_server_from_a_connected_network/index
 * Install the Ansible collection for Red hat Satellite: *yum install ansible-collection-redhat-satellite*
+* Install python2-jmespath *yum install python2-jmespath*
 * Satellite Installer was run with the enabledment of the TFTP feature:
 *satellite-installer --scenario satellite --foreman-initial-organization=lab --foreman-proxy-tftp=true*
 
