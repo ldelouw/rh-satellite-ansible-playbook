@@ -4,7 +4,7 @@
 This playbook is created by Luc de Louw <luc@delouw.ch>, <ldelouw@redhat.com>. It is free software licensed under the terms of the GNU General Public License GPL v3 or later. A copy of the license can be obtained here: http://www.gnu.org/licenses/gpl-3.0.html
 
 ## Motivation
-I've wrote that Playbook because I make a lot of experiments with the Red Hat Satellite, trying new stuff and 
+I've wrote this Playbook because I do a lot of experiments with the Red Hat Satellite, trying new stuff and 
 sometimes it breaks (i.e. when upgrade to a new beta relase). Manual installation takes a lot of time and it is boring as hell. Work smarter, not harder!
 
 ## Scope
@@ -15,14 +15,12 @@ it's just for the initial configuration
 At the moment, the Playbook covers the most important topics for getting a Satellite up and running
 
 ## Prerequisites
-
-Satellite Installer was run with the enabledment of the TFTP feature:
+* Subscribe the system, add the required repositories as described in the document https://access.redhat.com/documentation/en-us/red_hat_satellite/6.9/html-single/installing_satellite_server_from_a_connected_network/index
+* Install the Ansible collection for Red hat Satellite: *yum install ansible-collection-redhat-satellite*
+* Satellite Installer was run with the enabledment of the TFTP feature:
 *satellite-installer --scenario satellite --foreman-initial-organization=lab --foreman-proxy-tftp=true*
 
-
-
 ## Things *NOT* set up:
-
 For security reasons (I dont want to accidentially leak some real life credentials)
 * Register and subscribe the Satellite to Redhat CDN
 * Setting up an IPA Realm
@@ -37,7 +35,6 @@ For the sake of lazyness
   multiple vars.yml files per Org.
 
 To be done
-* Working firewalld role, current implementation is incomplete
 * More sophisticated activation key configuration such as subs and repo overrides
 * Creating a Letsencrypt cerfiicate using certbot
 * More general settings
@@ -54,8 +51,6 @@ Alter that, the passwd.yml vault password needs to be changed with *ansible-vaul
 Then, simply run it with *ansible-play sat6.yml --ask-vault*
 
 Note: It's recommended to have some basic Ansible knowledge to operate this playbook.
-
-
 
 ## Contributions
 Contributions are very welcome :-) Just send me a pull-request
