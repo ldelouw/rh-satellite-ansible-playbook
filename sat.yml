@@ -47,8 +47,8 @@
       tags: subnets
 #    - role: compute-resources
 #      tags: compute-resources
-    - role: hostgroups
-      tags: hostgroups
+    - role: host-groups
+      tags: host-groups
     - role: activationkeys
       tags: activationkeys
 
