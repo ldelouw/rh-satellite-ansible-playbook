@@ -16,10 +16,7 @@ At the moment, the Playbook covers the most important topics for getting a Satel
 
 ## Compatibility
 This version of the playbook was tested to be working with Satellite Version 6.8 and 6.9.
-
-The current beta version of 6.10 is not compatible, an error is thrown: *fatal: [localhost]: FAILED! => {"msg": "'satellite_hostgroups' is undefined"}* At the moment, host groups must be added manually in 6.10.
-
-Workaround: Run the playbook as following: *ansible-playbook --ask-vault sat.yml --skip-tags=hostgroups* 
+For Satellite 6.10 beta, at least currently, in the vars.yml you need to set the operatingsystem to i.e. "RedHat-8.4", while it is "RedHat 8.4" for older Satellites
 
 ## Prerequisites
 * Subscribe the system, add the required repositories as described in the document https://access.redhat.com/documentation/en-us/red_hat_satellite/6.9/html-single/installing_satellite_server_from_a_connected_network/index
