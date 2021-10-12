@@ -1,6 +1,6 @@
 # Satellite URL and hostname
-sat_url: "https://sat6.example.com"
-sat_hostname: sat6.example.com
+sat_url: "https://sat.example.com"
+sat_hostname: sat.example.com
 
 # Reserved for future usage
 capules:
@@ -79,32 +79,50 @@ products:
     # RHEL 8
 - "Red Hat Enterprise Linux for x86_64"
   # RHEL 7
-#- "Red Hat Enterprise Linux Server"
-#- "Red Hat Ansible Engine"
-#- "Red Hat Software Collections (for RHEL Server)"
+- "Red Hat Enterprise Linux Server"
+- "Red Hat Ansible Engine"
+- "Red Hat Software Collections (for RHEL Server)"
+- "Red Hat Satellite Capsule Beta"
 #- "Red Hat Enterprise Linux High Availability for x86_64"
 #- "Red Hat Enterprise Linux for SAP Applications for x86_64"
 
 redhat_kickstart_repos:
-#- label: "rhel-7-server-kickstart"
-#  repos:
-#  - { releasever: "7.7", basearch: "x86_64" }
-#  - { releasever: "7.8", basearch: "x86_64" }
+- label: "rhel-7-server-kickstart"
+  repos:
+  - { releasever: "7.9", basearch: "x86_64" }
 
 - label: "rhel-8-for-x86_64-baseos-kickstart"
   repos:
-  - { releasever: "8.3" }
   - { releasever: "8.4" }
 
 - label: "rhel-8-for-x86_64-appstream-kickstart"
   repos:
-  - { releasever: "8.3" }
   - { releasever: "8.4" }
 
 redhat_os_repos:
-#- label: rhel-7-server-rpms
-#  repos:
-#    - { releasever: "7Server", basearch: "x86_64" }
+- label: rhel-7-server-rpms
+  repos:
+    - { releasever: "7Server", basearch: "x86_64" }
+
+- label: rhel-server-rhscl-7-rpms
+  repos:
+    - { releasever: "7Server", basearch: "x86_64" }
+
+- label: rhel-server-7-satellite-capsule-6-beta-rpms
+  repos:
+    - { basearch: "x86_64" }
+
+- label: rhel-7-server-satellite-maintenance-6-beta-rpms
+  repos:
+    - { basearch: "x86_64" }
+
+- label: rhel-7-server-satellite-tools-6-beta-rpms
+  repos:
+    - { basearch: "x86_64" }
+
+- label: rhel-7-server-ansible-2.9-rpms
+  repos:
+    - { basearch: "x86_64" }
 
 #- label:  "rhel-7-server-optional-rpms"
 #  repos:
@@ -126,7 +144,7 @@ redhat_os_repos:
 #  repos:
 #    - { releasever: "7Server", basearch: "x86_64" }
 
-#- label: "rhel-7-server-satellite-tools-6.7-rpms"
+#- label: "rhel-7-server-satellite-tools-6.9-rpms"
 #  repos:
 #    - { basearch: "x86_64" }
 
@@ -169,19 +187,6 @@ redhat_os_repos:
 - label: "satellite-tools-6.9-for-rhel-8-x86_64-rpms"
   repos:
     - {  }
-
-#redhat_app_repos:
-#- label: rhel-7-server-ansible-2.8-rpms
-#  repos:
-#    - {  basearch: "x86_64" }
-
-#- label: rhel-7-server-satellite-maintenance-6-rpms
-#  repos:
-#    - { basearch: "x86_64" }
-
-#- label: rhel-server-rhscl-7-rpms
-#  repos:
-#    - { releasever: "7Server", basearch: "x86_64" }
 
 # Define an interval for the sync plan
 sync_plan: daily
@@ -227,6 +232,20 @@ content_views:
 #    - { name: "Red Hat Satellite Tools 6.7 for RHEL 7 Server RPMs x86_64", product: "Red Hat Enterprise Linux Server" }
 #    - { name: "Red Hat Software Collections RPMs for Red Hat Enterprise Linux 7 Server x86_64 7Server", product: "Red Hat Software Collections (for RHEL Server)" }
 #
+
+- name: cv-rhel7-x86_64
+  repositories:
+    - { name: "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server", product: "Red Hat Enterprise Linux Server" }
+    - { name: "Red Hat Enterprise Linux 7 Server Kickstart x86_64 7.9", product: "Red Hat Enterprise Linux Server" }
+    - { name: "Red Hat Satellite Tools 6 Beta for RHEL 7 Server RPMs x86_64", product: "Red Hat Enterprise Linux Server" }
+    - { name: "Red Hat Software Collections RPMs for Red Hat Enterprise Linux 7 Server x86_64 7Server", product: "Red Hat Software Collections (for RHEL Server)" }
+
+- name: cv-capsule-beta
+  repositories:
+    - { name: "Red Hat Satellite Capsule 6 Beta for RHEL 7 Server RPMs x86_64", product: "Red Hat Satellite Capsule Beta" }
+    - { name: "Red Hat Ansible Engine 2.9 RPMs for Red Hat Enterprise Linux 7 Server x86_64", product: "Red Hat Ansible Engine" }
+    - { name: "Red Hat Satellite Maintenance 6 Beta for RHEL 7 Server RPMs x86_64", product: "Red Hat Enterprise Linux Server" }
+
 - name: "cv-rhel8-x86_64"
   repositories:
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS Kickstart 8.4', product: 'Red Hat Enterprise Linux for x86_64' }
@@ -240,6 +259,11 @@ ccv:
 - name: 'ccv-rhel8-x86_64-generic'
   cv:
     - 'cv-rhel8-x86_64'
+
+- name: ccv-rhel7-capsule-beta
+  cv:
+    - cv-rhel7-x86_64
+    - cv-capsule-beta
 
 # Define host collections
 host_collections:
@@ -265,7 +289,7 @@ hostgroups:
   parent: "BER/prod/sap"
   locations: "BER"
   architecture: "x86_64"
-  operatingsystem: "RedHat-8.4"
+  operatingsystem: "RedHat 8.4"
   ptable: 01-kickstart-default
   lifecycle_environment: prod
   content_source: "{{ sat_hostname }}"
@@ -282,7 +306,7 @@ hostgroups:
   parent: "BER/prod/generic"
   location: "BER"
   architecture: x86_64
-  operatingsystem: "RedHat-8.4"
+  operatingsystem: "RedHat 8.4"
   ptable: 01-kickstart-default
   lifecycle_environment: prod
   content_view: ccv-rhel8-x86_64-generic
