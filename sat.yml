@@ -33,8 +33,6 @@
       tags: environments
     - role: content-views
       tags: content-views
-    - role: activationkeys
-      tags: activation_keys
     - role: host-collections
       tags: host-collections
     - role: ptable
