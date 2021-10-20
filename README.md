@@ -23,6 +23,7 @@ For Satellite 6.10 beta, at least currently, in the vars.yml you need to set the
 * Install the Satellite,python2-jmespath and the Ansible collection for Red hat Satellite: *yum -y install satellite ansible-collection-redhat-satellite python2-jmespath*
 * Satellite Installer was run with the enabledment of the TFTP feature:
 *satellite-installer --scenario satellite --foreman-initial-organization=lab --foreman-proxy-tftp=true*
+* Clone this repo: *git clone https://github.com/ldelouw/rh-satellite-ansible-playbook.git*
 
 ## Things *NOT* set up:
 For security reasons (I dont want to accidentially leak some real life credentials)
