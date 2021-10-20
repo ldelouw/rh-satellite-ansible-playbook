@@ -20,8 +20,7 @@ For Satellite 6.10 beta, at least currently, in the vars.yml you need to set the
 
 ## Prerequisites
 * Subscribe the system, add the required repositories as described in the document https://access.redhat.com/documentation/en-us/red_hat_satellite/6.9/html-single/installing_satellite_server_from_a_connected_network/index
-* Install the Ansible collection for Red hat Satellite: *yum install ansible-collection-redhat-satellite*
-* Install python2-jmespath *yum install python2-jmespath*
+* Install the Satellite,python2-jmespath and the Ansible collection for Red hat Satellite: *yum -y install yum install satellite ansible-collection-redhat-satellite python2-jmespath*
 * Satellite Installer was run with the enabledment of the TFTP feature:
 *satellite-installer --scenario satellite --foreman-initial-organization=lab --foreman-proxy-tftp=true*
 
