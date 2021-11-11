@@ -48,7 +48,6 @@
     gpg_key: "{{ item.gpg_key|default(omit) }}"
     product: "{{ item.product }}"
     mirror_on_sync: false
-    download_policy: "immediate"
   loop: "{{ additional_repos }}"
   tags: 3rd_party_repos
 
