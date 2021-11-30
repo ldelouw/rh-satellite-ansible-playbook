@@ -1,7 +1,8 @@
 ---
-- fail:                                                                     
-    msg: "Please proceed with a manual initial sync of the repos. When the    
-        sync is done, provide the \"synced=true\" parameter in the            
+- name: Fail when content is not yet synced
+  fail:
+    msg: "Please proceed with a manual initial sync of the repos. When the
+        sync is done, provide the \"synced=true\" parameter in the
         --extra-vars or in the vars.yml file. Re-run the playbook to continue"
   when: synced is not defined
 
@@ -11,7 +12,7 @@
     password: "{{ sat_passwd }}"
     server_url: "{{ sat_url }}"
     organization: "{{ organization }}"
-    name: "{{ item.name}}"
+    name: "{{ item.name }}"
     repositories: "{{ item.repositories }}"
   loop: "{{ content_views }}"
   tags: content_views
@@ -39,7 +40,7 @@
     organization: "{{ organization }}"
     content_view: "{{ item.name }}"
     lifecycle_environments: "Library"
-  when: cv_changed.changed
+  when: cv_changed.changed and published = True
   loop: "{{ content_views }}"
   tags: cv_publish
 
@@ -51,7 +52,7 @@
     organization: "{{ organization }}"
     content_view: "{{ item.name }}"
     lifecycle_environments: "Library"
-  when: cv_changed.changed
+  when: cv_changed.changed and published = True
   loop: "{{ ccv }}"
   tags: cv_publish
 
@@ -62,7 +63,7 @@
     server_url: "{{ sat_url }}"
     content_view: "{{ item.name }}"
     organization: "{{ organization }}"
-    # Neeed to figure out how to create a loop over environments to avoid hard 
+    # Neeed to figure out how to create a loop over environments to avoid hard
     # coding stuff
     lifecycle_environments:
       - test
