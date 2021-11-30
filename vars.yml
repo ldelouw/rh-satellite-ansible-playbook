@@ -317,5 +317,5 @@ hostgroups:
  
 # Define activation keys
 activation_keys:
-- { name: "ak-rhel8-generic-test", lifecycle_environment: "test", content_view: "ccv-rhel8-x86_64-generic", content_overrides: "satellite-tools-6.9-for-rhel-8-x86_64-rpms" }
+- { name: "ak-rhel8-generic-test", lifecycle_environment: "test", subscriptions: "Red Hat Subscription Name", content_view: "ccv-rhel8-x86_64-generic", content_overrides: "satellite-tools-6.9-for-rhel-8-x86_64-rpms" }
 
