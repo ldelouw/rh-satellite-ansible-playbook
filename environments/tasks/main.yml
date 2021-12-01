@@ -22,4 +22,3 @@
     prior: "test"
     description: "prod"
     state: "present"
-

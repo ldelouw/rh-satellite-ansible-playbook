@@ -1,8 +1,9 @@
 ---
-- name: "Copy partition table to Satellite" 
+- name: "Copy partition table to Satellite"
   copy:
     src: "files/01-kickstart-default-ptable.erb"
     dest: /root/01-kickstart-default-ptable.erb
+    mode: 0644
 
 - name: "Create Partition Template 01-kickstart-default-ptable"
   redhat.satellite.partition_table:

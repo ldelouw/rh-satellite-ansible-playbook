@@ -7,7 +7,7 @@
     name: "http_proxy"
     value: "{{ default_http_proxy_url }}"
   when: default_http_proxy_url is defined
-  tags: 
+  tags:
     - proxy
     - settings
 
@@ -19,7 +19,7 @@
     name: "content_default_http_proxy"
     value: default_http_proxy
   when: default_http_proxy_url is defined
-  tags: 
+  tags:
     - proxy
     - settings
 
@@ -31,7 +31,7 @@
     name: "default_redhat_download_policy"
     value: "{{ rh_repo_download_policy }}"
   when: rh_repo_download_policy is defined
-  tags: 
+  tags:
     - download_policy
     - settings
 
@@ -43,7 +43,7 @@
     name: "default_download_policy"
     value: "{{ custom_repo_download_policy }}"
   when: custom_repo_download_policy is defined
-  tags: 
+  tags:
     - download_policy
     - settings
 
@@ -55,6 +55,6 @@
     name: "default_proxy_download_policy"
     value: "{{ capsule_repo_download_policy }}"
   when: capsule_repo_download_policy is defined
-  tags: 
+  tags:
     - download_policy
     - settings

@@ -8,10 +8,10 @@
     family: Redhat
     major: 8
     minor: 4
-    ptables: 
-    - 01-kickstart-default
-    - "Kickstart default"
+    ptables:
+      - 01-kickstart-default
+      - "Kickstart default"
     password_hash: SHA256
-    #state: present_with_defaults
+    # state: present_with_defaults
     state: present
   tags: os

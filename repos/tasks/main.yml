@@ -50,4 +50,3 @@
     mirror_on_sync: false
   loop: "{{ additional_repos }}"
   tags: 3rd_party_repos
-

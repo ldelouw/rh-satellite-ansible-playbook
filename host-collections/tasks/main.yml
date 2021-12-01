@@ -9,4 +9,3 @@
     state: present
   loop: "{{ host_collections }}"
   tags: host_collections
-

@@ -9,4 +9,3 @@
     organizations: "{{ organization }}"
   loop: "{{ domains }}"
   tags: domains
-

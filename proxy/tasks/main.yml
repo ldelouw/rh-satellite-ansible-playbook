@@ -4,7 +4,7 @@
     name: "default_http_proxy"
     url: "{{ default_http_proxy_url }}"
     locations: "{{ item }}"
-    organizations: 
+    organizations:
       - "{{ organization }}"
     server_url: "{{ sat_url }}"
     username: "{{ sat_user }}"

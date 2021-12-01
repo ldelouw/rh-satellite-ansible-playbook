@@ -1,12 +1,12 @@
 ---
-  - name: "Configure locations"
-    redhat.satellite.location:
-      username: "{{ sat_user }}"
-      password: "{{ sat_passwd }}"
-      server_url: "{{ sat_url }}"
-      name: "{{ item }}"
-      organizations:
-        - "{{ organization }}"
-      state: present
-    loop: "{{ locations }}"
-    tags: locations
+- name: "Configure locations"
+  redhat.satellite.location:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    name: "{{ item }}"
+    organizations:
+      - "{{ organization }}"
+    state: present
+  loop: "{{ locations }}"
+  tags: locations

@@ -1,8 +1,9 @@
 ---
-- firewalld:
+- name: Configure Firewall
+  firewalld:
     zone: public
     port: "{{ item }}"
-    permanent: yes
+    permanent: true
     state: enabled
   loop:
     - "80/tcp"
@@ -18,5 +19,3 @@
 
 - name: Reload firewalld
   command: firewall-cmd --reload
-  
-  
