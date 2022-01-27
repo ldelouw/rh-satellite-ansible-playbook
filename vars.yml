@@ -16,7 +16,18 @@ sat_user: "admin"
 # If you provided another location during the Satellite installation, change it
 organization: "lab"
 
-# Whatever locations are used in you organization. This locations also need to 
+
+lifecycle_paths:
+  - - label: dev
+    - label: test
+    - label: prod
+
+  - - label: other_dev
+    - label: other_test
+    - label: other_prod
+
+
+# Whatever locations are used in you organization. This locations also need to
 # be changed in other placed in this file
 locations:
   - NUE

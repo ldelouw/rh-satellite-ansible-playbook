@@ -43,8 +43,8 @@
       tags: domains
     - role: subnets
       tags: subnets
-#    - role: compute-resources
-#      tags: compute-resources
+  # - role: compute-resources
+  #   tags: compute-resources
     - role: host-groups
       tags: host-groups
     - role: activationkeys
