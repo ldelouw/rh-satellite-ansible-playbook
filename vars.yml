@@ -325,8 +325,16 @@ hostgroups:
   lifecycle_environment: prod
   content_view: ccv-rhel8-x86_64-generic
 
- 
 # Define activation keys
 activation_keys:
-- { name: "ak-rhel8-generic-test", lifecycle_environment: "test", subscriptions: "Red Hat Subscription Name", content_view: "ccv-rhel8-x86_64-generic", content_overrides: "satellite-tools-6.9-for-rhel-8-x86_64-rpms" }
-
+  - name: "ak-rhel8-generic-test"
+    lifecycle_environment: "test"
+    subscriptions:
+      - name: "Red Hat Subscription Name"
+      - name: "Red Hat Subscription Name 2"
+    content_view: "ccv-rhel8-x86_64-generic"
+    content_overrides:
+      - label: "satellite-tools-6.10-for-rhel-8-x86_64-rpms"
+        override: present
+      - label: "whatever-repo"
+        override: present
