@@ -40,7 +40,7 @@
     organization: "{{ organization }}"
     content_view: "{{ item.name }}"
     lifecycle_environments: "Library"
-  when: cv_changed.changed and published = True
+  when: cv_changed.changed
   loop: "{{ content_views }}"
   tags: cv_publish
 
@@ -52,7 +52,7 @@
     organization: "{{ organization }}"
     content_view: "{{ item.name }}"
     lifecycle_environments: "Library"
-  when: cv_changed.changed and published = True
+  when: cv_changed.changed
   loop: "{{ ccv }}"
   tags: cv_publish
 
