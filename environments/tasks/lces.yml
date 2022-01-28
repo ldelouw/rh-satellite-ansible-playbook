@@ -1,0 +1,15 @@
+---
+- name: "Add a lifecycle environment"
+  redhat.satellite.lifecycle_environment:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    name: "{{ item.name | default(item.label) }}"
+    label: "{{ item.label }}"
+    organization: "{{ item.org | default(organization) }}"
+    prior: "{{ item.prior | default((lce_idx > 0) | ternary(lcp_item[lce_idx-1]['label'], 'Library')) }}"
+    description: "{{ item.desc | default(omit) }}"
+    state: "{{ item.state | default(omit) }}"
+  loop: "{{ lcp_item }}"
+  loop_control:
+    index_var: lce_idx
