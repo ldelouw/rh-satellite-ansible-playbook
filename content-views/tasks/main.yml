@@ -56,7 +56,7 @@
   loop: "{{ ccv }}"
   tags: cv_publish
 
-- name: "Pubish composite content views and promote it to test -> prod"
+- name: "Publish composite content views and promote it to test -> prod"
   redhat.satellite.content_view_version:
     username: "{{ sat_user }}"
     password: "{{ sat_passwd }}"
