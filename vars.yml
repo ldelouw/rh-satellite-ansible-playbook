@@ -335,6 +335,18 @@ activation_keys:
     content_view: "ccv-rhel8-x86_64-generic"
     content_overrides:
       - label: "satellite-tools-6.10-for-rhel-8-x86_64-rpms"
-        override: present
+        override: enabled
       - label: "whatever-repo"
-        override: present
+        override: enabled
+
+  - name: "ak-rhel8-generic-prod"
+    lifecycle_environment: "prod"
+    subscriptions:
+      - name: "Red Hat Subscription Name"
+      - name: "Red Hat Subscription Name 2"
+    content_view: "ccv-rhel8-x86_64-generic"
+    content_overrides:
+      - label: "satellite-tools-6.10-for-rhel-8-x86_64-rpms"
+        override: enabled
+      - label: "whatever-repo"
+        override: enabled
