@@ -26,6 +26,8 @@ lifecycle_paths:
     - label: other_test
     - label: other_prod
 
+# Plain list of all labels defined in lifecycle_paths above
+lifecycle_environments: "{{ lifecycle_paths|flatten|map(attribute='label')|list }}"
 
 # Whatever locations are used in you organization. This locations also need to
 # be changed in other placed in this file
