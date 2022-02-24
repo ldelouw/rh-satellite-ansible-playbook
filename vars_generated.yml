@@ -1,0 +1,106 @@
+---
+# Example how to create generated config based on combinations of various input
+# parameters.
+#
+# Here, we use a list of 'customer_ids' from which various host collections and
+# matching activation keys are to be derived. Make sure to exclude the static
+# definitions of host_collections, and activation_keys in vars.yml before
+# including this additional vars file.
+
+# Create a list of customer_ids [ "cid-1", "cid-2", ... , "cid-100" ]
+# Can just as well be provided as a pre-defined, static list
+customer_id_prefix: 'cid'
+customer_id_min: 1
+customer_id_max: 100
+customer_ids: "{{ [customer_id_prefix]|product(range(customer_id_min, customer_id_max))|map('join', '-')|list }}"
+
+# Create a list of host collections from all possible combinations of
+# customer_ids and lifecycle_environments (excluding 'dev' LCEs).
+# Generated name will be 'hc-<customer_id>-<lifecycle_environment>'.
+# NB: We follow a generic way that allows us to re-use some definitions
+#     when handling activation keys below, and thus ensures consistency.
+
+# Dict of lists comprising of all possible values for individual items
+host_collection_combination_components:
+  "customer_id": "{{ customer_ids }}"
+  "lifecycle_environment": "{{ lifecycle_environments|reject('search', 'dev')|list }}"
+
+# Build list of dicts with all possible combinations of input values
+# i.e. transform
+#   { a: [a1, a2], b: [b1, b2] }
+# into
+#   [ { a: a1, b: b1 }, { a: a1, b: b2 }, { a: a2, b: b1 }, { a: a2, b: b2 } ]
+host_collection_combinations: >
+  {{ lookup('cartesian', *(host_collection_combination_components.values())) |
+      map('zip', host_collection_combination_components.keys()) |
+      map('list') |
+      map('items2dict', key_name=1, value_name=0) |
+      list }}
+
+# JMESPath expression to generate 'host_collection' entry from 'combinations' input dict items
+host_collection_prefix: "hc"
+host_collection_generator: "join('-',['{{ host_collection_prefix }}', customer_id, lifecycle_environment])"
+host_collection_generator_query: >
+  [*].{{ host_collection_generator }}
+
+# Build final list of host collections
+host_collections: "{{ host_collection_combinations|json_query(host_collection_generator_query) }}"
+
+# Create a list of activation keys from all possible combinations of
+# customer_ids, ccvs and lifecycle_environments (excluding 'dev' LCEs).
+
+# Static entries that are merged into each generated `activation_keys` dict.
+activation_key_common:
+  subscriptions:
+    - name: "Red Hat Subscription Name"
+    - name: "Red Hat Subscription Name 2"
+    - name: "{{ organization }}_oss"
+  content_overrides:
+    - label: "satellite-tools-6.10-for-rhel-8-x86_64-rpms"
+      override: enabled
+    - label: "whatever-repo"
+      override: enabled
+
+# Dict of lists comprising of all possible values for individual items
+# NB: Here we generate a separate list of combinations from the one generated
+#     for host_collections above. Depending on specific requirements, it might
+#     make sense to use a common set of combinations, and uniquify generated
+#     output, instead.
+activation_key_combination_components:
+  "customer_id": "{{ customer_ids }}"
+  "content_view": "{{ ccv|map(attribute='name')|list }}"
+  "lifecycle_environment": "{{ lifecycle_environments|reject('search', 'dev')|list }}"
+
+# Build list of dicts with all possible combinations of input values
+# i.e. transform
+#   { a: [a1, a2], b: [b1, b2] }
+# into
+#   [ { a: a1, b: b1 }, { a: a1, b: b2 }, { a: a2, b: b1 }, { a: a2, b: b2 } ]
+activation_key_combinations: >
+  {{ lookup('cartesian', *(activation_key_combination_components.values())) |
+      map('zip', activation_key_combination_components.keys()) |
+      map('list') |
+      map('items2dict', key_name=1, value_name=0) |
+      list }}
+
+# JMESPath expression to generate 'name' entry from 'combinations' input dict items
+activation_key_prefix: "ak"
+activation_keys_name_generator: "join('-',['{{ activation_key_prefix }}', customer_id, content_view, lifecycle_environment])"
+
+# JMESPath to generate 'activation_keys' dict from 'combinations' input dict items
+# host_collection_generator was already defined above.
+# content_view, and lifecycle_environment are just taken over verbatim from the input.
+activation_keys_generator_query: >
+  [*].{
+        name: {{ activation_keys_name_generator }},
+        host_collection: {{ host_collection_generator }},
+        content_view: content_view,
+        lifecycle_environment: lifecycle_environment
+      }
+
+# Generate activation_keys from 'combinations' list of dicts
+activation_keys_generated: "{{ activation_key_combinations|json_query(activation_keys_generator_query) }}"
+
+# Add static dict items that are common to all entries
+activation_keys: "{{ activation_keys_generated|map('combine', activation_key_common|default({}))|list }}"
+
