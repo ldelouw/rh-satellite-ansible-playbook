@@ -53,7 +53,7 @@ with your real life environment. Please also read the comments for better unders
 
 Alter that, the passwd.yml vault password needs to be changed with *ansible-vault rekey passwd.yml*, the password is *changeme*. Edit the passwd.yml file with *ansible-vault edit passwd.yml* and use your real Satellite password and if needed uncomment the default_http_proxy_passwd and change to the real world Proxy password
 
-Then, simply run it with *ansible-play sat6.yml --ask-vault*
+Then, simply run it with *ansible-playbook sat6.yml --ask-vault*
 
 Note: It's recommended to have some basic Ansible knowledge to operate this playbook.
 
