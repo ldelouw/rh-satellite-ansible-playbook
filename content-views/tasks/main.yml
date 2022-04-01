@@ -63,9 +63,5 @@
     server_url: "{{ sat_url }}"
     content_view: "{{ item.name }}"
     organization: "{{ organization }}"
-    # Neeed to figure out how to create a loop over environments to avoid hard
-    # coding stuff
-    lifecycle_environments:
-      - test
-      - prod
+    lifecycle_environments: "{{ lifecycle_environments }}"
   loop: "{{ ccv }}"
