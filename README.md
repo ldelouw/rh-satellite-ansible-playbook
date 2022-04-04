@@ -29,7 +29,7 @@ This version of the playbook was tested to be working with Satellite Version 6.1
 --enable=rhel-server-rhscl-7-rpms \
 --enable=rhel-7-server-ansible-2.9-rpms
 	* yum -y update && reboot
-* Install the Satellite,python2-jmespath and the Ansible collection for Red hat Satellite: *yum -y install satellite ansible-collection-redhat-satellite python2-jmespath*
+* Install the Satellite,python2-jmespath and the Ansible collection for Red hat Satellite: *yum -y install satellite ansible-collection-redhat-satellite python2-jmespath git*
 * Satellite Installer was run with the enabledment of the TFTP feature:
 *satellite-installer --scenario satellite --foreman-initial-organization=lab --foreman-proxy-tftp=true*
 * Clone this repo: *git clone https://github.com/ldelouw/rh-satellite-ansible-playbook.git*
