@@ -1,6 +1,7 @@
+---
 # Satellite URL and hostname
-sat_url: "https://sat.example.com"
 sat_hostname: sat.example.com
+sat_url: "https://{{ sat_hostname }}"
 
 # Reserved for future usage
 capules:
@@ -10,18 +11,17 @@ capules:
 # Needs to be a user with the admin role
 sat_user: "admin"
 
-# Please see passwd.yml ansible vault file
+# Please use the encrypted passwd.yml ansible vault file
 # sat_passwd: some-pass
 
 # If you provided another location during the Satellite installation, change it
 organization: "lab"
 
-
 lifecycle_paths:
   - - label: dev
     - label: test
     - label: prod
-
+# Another lifecycle path
   - - label: other_dev
     - label: other_test
     - label: other_prod
@@ -31,59 +31,59 @@ lifecycle_environments: "{{ lifecycle_paths|flatten|map(attribute='label')|list 
 
 # Whatever locations are used in you organization. This locations also need to
 # be changed in other placed in this file
+# A location can be a physical or logical location such as a datacenter
+# location or a network zone
 locations:
   - NUE
   - BER
 
 # Change this to True if you made an inital sync of all repositories, this
 # is a manual task as it can take multiple hours to complete
-#synced: True
+# synced: True
 #
 # Should content be published and promoted when CVs have been changed?
-publish: False
+publish: false
 
 # Proxy stuff is Optional. If not set, it will be ignored
 # Default Proxy and user to be used to sync content from Red Hat CDN
-#
+
 # default_http_proxy_url: "http://proxy.example.com:3128"
 # default_http_proxy_user: proxy_user
-# default_http_proxy_passwd: See passwd.yml vault file
+# default_http_proxy_passwd: Please use the encrypted passwd.yml vault file
 
-# This defines if the packages should be downloaded immediately or on demand. 
+# This defines if the packages should be downloaded immediately or on demand.
 # Possible values on_demand, which is the default, and immediate
 rh_repo_download_policy: on_demand
 
-# This defines if the packages should be downloaded immediately or on demand. 
+# This defines if the packages should be downloaded immediately or on demand.
 # Possible values on_demand, which is the default, and immediate
 custom_repo_download_policy: on_demand
 
-# This defines if capsules should download content immediately or on demand on 
+# This defines if capsules should download content immediately or on demand on
 # syncing content. Default is on_demand
 capsule_repo_download_policy: on_demand
 
-# Compute resource stuff
+# Compute resource stuff as an example for libvirt, unused in the playbook
 libvirt_hv: "qemu+ssh://user@libvirt.example.com/system"
 libvirt_hypervisor_name: libvirt-hypervisor
 libvirt_disksize: 20G
 libvirt_nic: br100
 
-# Define Domains
-
+# Define DNS Domains
 domains:
   - { name: "example.com", locations: "BER" }
   - { name: "example.net", locations: "BER,NUE" }
 
 # Define Subnets
 subnets:
-  - { name: "vlan100", network: "192.168.100.0", mask: "255.255.255.0", gateway: "192.168.100.1", dns_primary: "192.168.100.1", domains: "example.com", from_ip: "192.168.100.100", to_ip: "192.168.100.200", boot_mode: "Static", tftp_proxy: "{{ sat_hostname }}" } 
-  - { name: "vlan101", network: "192.168.101.0", mask: "255.255.255.0", gateway: "192.168.101.1", dns_primary: "192.168.101.1", domains: "example.net", from_ip: "192.168.101.100", to_ip: "192.168.101.200", boot_mode: "Static", tftp_proxy: "{{ sat_hostname }}" } 
-
+  - { name: "vlan100", network: "192.168.100.0", mask: "255.255.255.0", gateway: "192.168.100.1", dns_primary: "192.168.100.1", domains: "example.com", from_ip: "192.168.100.100", to_ip: "192.168.100.200", boot_mode: "Static", tftp_proxy: "{{ sat_hostname }}" }
+  - { name: "vlan101", network: "192.168.101.0", mask: "255.255.255.0", gateway: "192.168.101.1", dns_primary: "192.168.101.1", domains: "example.net", from_ip: "192.168.101.100", to_ip: "192.168.101.200", boot_mode: "Static", tftp_proxy: "{{ sat_hostname }}" }
 
 # Red Hat Repositories to be enabled
 # Instructions:
 #
-# - Only provide a releasever, if the repo contains more than one 
-#   minor release. This is i.e. the case with the 
+# - Only provide a releasever, if the repo contains more than one
+#   minor release. This is i.e. the case with the
 #   rhel-7-server-satellite-tools-6.7-rpms repo
 #
 # - Only provide a base architecure where there is more than one arch available
@@ -92,15 +92,20 @@ subnets:
 
 # Define products
 products:
-    # RHEL 8
+# RHEL 8
 - "Red Hat Enterprise Linux for x86_64"
-  # RHEL 7
+
+# RHEL 8 update services for SAP (e4s)
+- "Red Hat Enterprise Linux Server - Update Services for SAP Solutions"
+- "Red Hat Enterprise Linux High Availability - Update Services for SAP Solutions"
+
+# RHEL 7 (Yes, it has a different Product name than that one for RHEL 7)
 - "Red Hat Enterprise Linux Server"
+
+# RHEL 7 Capsule
 - "Red Hat Ansible Engine"
 - "Red Hat Software Collections (for RHEL Server)"
-- "Red Hat Satellite Capsule Beta"
-#- "Red Hat Enterprise Linux High Availability for x86_64"
-#- "Red Hat Enterprise Linux for SAP Applications for x86_64"
+- "Red Hat Satellite Capsule"
 
 redhat_kickstart_repos:
 - label: "rhel-7-server-kickstart"
@@ -116,75 +121,53 @@ redhat_kickstart_repos:
   - { releasever: "8.4" }
 
 redhat_os_repos:
-- label: rhel-7-server-rpms
+- label: "rhel-7-server-rpms"
   repos:
     - { releasever: "7Server", basearch: "x86_64" }
 
-- label: rhel-server-rhscl-7-rpms
+- label: "rhel-server-rhscl-7-rpms"
   repos:
     - { releasever: "7Server", basearch: "x86_64" }
 
-- label: rhel-server-7-satellite-capsule-6-beta-rpms
+- label: "rhel-7-server-satellite-capsule-6.10-rpms"
   repos:
     - { basearch: "x86_64" }
 
-- label: rhel-7-server-satellite-maintenance-6-beta-rpms
+- label: "rhel-7-server-satellite-maintenance-6-rpms"
   repos:
     - { basearch: "x86_64" }
 
-- label: rhel-7-server-satellite-tools-6-beta-rpms
+- label: "rhel-7-server-satellite-tools-6.10-rpms"
   repos:
     - { basearch: "x86_64" }
 
-- label: rhel-7-server-ansible-2.9-rpms
+- label: "rhel-7-server-ansible-2.9-rpms"
   repos:
     - { basearch: "x86_64" }
 
-#- label:  "rhel-7-server-optional-rpms"
-#  repos:
-#    - { releasever: "7Server", basearch: "x86_64" }
+- label:  "rhel-7-server-optional-rpms"
+  repos:
+    - { releasever: "7Server", basearch: "x86_64" }
 
-#- label:  "rhel-sap-for-rhel-7-server-rpms"
-#  repos:
-#    - { releasever: "7Server", basearch: "x86_64" }
+- label:  "rhel-7-server-extras-rpms"
+  repos:
+    - { basearch: "x86_64" }
 
-#- label:  "rhel-ha-for-rhel-7-server-rpms"
-#  repos:
-#    - { releasever: "7Server", basearch: "x86_64" }
+- label:  "rhel-7-server-supplementary-rpms"
+  repos:
+    - { releasever: "7Server", basearch: "x86_64" }
 
-#- label:  "rhel-7-server-extras-rpms"
-#  repos:
-#    - { basearch: "x86_64" }
+- label: "rhel-7-server-satellite-tools-6.10-rpms"
+  repos:
+    - { basearch: "x86_64" }
 
-#- label:  "rhel-7-server-supplementary-rpms"
-#  repos:
-#    - { releasever: "7Server", basearch: "x86_64" }
-
-#- label: "rhel-7-server-satellite-tools-6.9-rpms"
-#  repos:
-#    - { basearch: "x86_64" }
-
-#- label: "rhel-7-server-eus-rpms"
-#  repos:
-#    - { releasever: "7.7", basearch: "x86_64" }
-
-#- label: "rhel-ha-for-rhel-7-server-eus-rpms"
-#  repos:
-#    - { releasever: "7.7", basearch: "x86_64" }
-
-#- label: "rhel-7-server-eus-supplementary-rpms"
-#  repos:
-#    - { releasever: "7.7", basearch: "x86_64" }
-
-#- label: "rhel-7-server-satellite-capsule-6.9-rpms"
-#  repos:
-#     - { basearch: "x86_64" }
-
-#- label: "rhel-8-for-x86_64-appstream-eus-rpms"
+# Example for Extended Update Suppoer repositories (EUS)
+# only use them if you have a strong business case
+# - label: "rhel-8-for-x86_64-appstream-eus-rpms"
 #  repos:
 #    - { releasever: "8.3" }
 
-#- label: "rhel-8-for-x86_64-baseos-eus-rpms"
+# - label: "rhel-8-for-x86_64-baseos-eus-rpms"
 #  repos:
 #    - { releasever: "8.4" }
 
@@ -200,9 +183,61 @@ redhat_os_repos:
   repos:
     - { releasever: "8" }
 
-- label: "satellite-tools-6.9-for-rhel-8-x86_64-rpms"
+- label: "satellite-tools-6.10-for-rhel-8-x86_64-rpms"
   repos:
-    - {  }
+    - { }
+
+# Update Services for SAP Solutions (e4s)
+- label: "rhel-8-for-x86_64-baseos-e4s-rpms"
+  repos:
+    - { releasever: "8.4" }
+                                                                                
+- label: "rhel-8-for-x86_64-appstream-e4s-rpms"
+  repos:
+    - { releasever: "8.4" }
+
+- label: "rhel-8-for-x86_64-highavailability-e4s-rpms"
+  repos:
+    - { releasever: "8.4" }
+
+- label: "rhel-8-for-x86_64-sap-netweaver-e4s-rpms"
+  repos:
+    - { releasever: "8.4" }
+
+- label: "rhel-8-for-x86_64-sap-solutions-e4s-rpms"
+  repos:
+    - { releasever: "8.2" }
+
+- label: "satellite-tools-6.10-for-rhel-8-x86_64-e4s-rpms"
+  repos:
+    - { releasever: "8.4" }
+
+# For future usage when RHEL 8.6 e4s is released
+# proceed accordingly with the content views as well
+
+# - label: "rhel-8-for-x86_64-baseos-e4s-rpms"
+#  repos:
+#    - { releasever: "8.6" }
+
+# - label: "rhel-8-for-x86_64-appstream-e4s-rpms"
+#  repos:
+#    - { releasever: "8.6" }
+
+# - label: "rhel-8-for-x86_64-highavailability-e4s-rpms"
+#  repos:
+#    - { releasever: "8.6" }
+
+# - label: "rhel-8-for-x86_64-sap-netweaver-e4s-rpms"
+#  repos:
+#    - { releasever: "8.6" }
+
+# - label: "rhel-8-for-x86_64-sap-solutions-e4s-rpms"
+#  repos:
+#    - { releasever: "8.6" }
+
+# - label: "satellite-tools-6.10-for-rhel-8-x86_64-e4s-rpms"
+#  repos:
+#    - { releasever: "8.6" }
 
 # Define an interval for the sync plan
 sync_plan: daily
@@ -210,14 +245,17 @@ sync_interval: daily
 
 # This can be used for 3rd party repos. the prefix will be the Organizations
 # name, custom can be used for homegrown software or homemade RPMs,
-# oss can be used for i.e. EPEL, proprietary for closed source software RPMs 
+# oss can be used for i.e. EPEL, proprietary for closed source software RPMs
 # provided by a software vendor
+#
+# Caveat: Does not work over Proxy for unknown reason (probably a bug),
+# please comment out when using it within a corporate network
 #
 gpg_keys:
 - { name: "RPM-GPG-KEY-EPEL", url: "https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL" }
 - { name: "RPM-GPG-KEY-EPEL-8", url: "https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-8" }
 
-
+# Take care about licenses with custom products, add one per non-oss license
 additional_products:
   - name: "{{ organization }}_custom"
   - name: "{{ organization }}_oss"
@@ -226,43 +264,34 @@ additional_products:
 additional_repos:
 #  - name: "epel7"
 #    url: "https://ftp.tu-chemnitz.de/pub/linux/fedora-epel/7/x86_64/"
-#    product: "{{ organization }}_oss" 
+#    product: "{{ organization }}_oss"
 
 # Please change the EPEL URL to you closest mirror server
   - name: "epel8"
     url: "https://ftp.tu-chemnitz.de/pub/linux/fedora-epel/8/Everything/x86_64/"
-    product: "{{ organization }}_oss" 
+    product: "{{ organization }}_oss"
     gpg_key: RPM-GPG-KEY-EPEL-8
 
 # Define content views
-content_views:
-#- name: "cv-rhel7-x86_64"
-#  repositories:
-#    - { name: "Red Hat Enterprise Linux 7 Server - Extras RPMs x86_64", product: "Red Hat Enterprise Linux Server" }
-#    - { name: "Red Hat Enterprise Linux 7 Server Kickstart x86_64 7.8", product: "Red Hat Enterprise Linux Server" }
-#    - { name: "Red Hat Enterprise Linux 7 Server - Supplementary RPMs x86_64 7Server", product: "Red Hat Enterprise Linux Server" }
-#    - { name: "Red Hat Enterprise Linux for SAP RHEL 7 Server RPMs x86_64 7Server", product: "Red Hat Enterprise Linux for SAP Applications for x86_64" }
-#    - { name: "Red Hat Enterprise Linux 7 Server - Optional RPMs x86_64 7Server", product: "Red Hat Enterprise Linux Server" }
-#    - { name: "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server", product: "Red Hat Enterprise Linux Server" }
-#    - { name: "Red Hat Enterprise Linux High Availability for RHEL 7 Server RPMs x86_64 7Server", product: "Red Hat Enterprise Linux High Availability for x86_64" }
-#    - { name: "Red Hat Satellite Tools 6.7 for RHEL 7 Server RPMs x86_64", product: "Red Hat Enterprise Linux Server" }
-#    - { name: "Red Hat Software Collections RPMs for Red Hat Enterprise Linux 7 Server x86_64 7Server", product: "Red Hat Software Collections (for RHEL Server)" }
 #
-
-- name: cv-rhel7-x86_64
+# RHEL 7 Latest
+content_views:
+- name: "cv-rhel7-x86_64"
   repositories:
     - { name: "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server", product: "Red Hat Enterprise Linux Server" }
     - { name: "Red Hat Enterprise Linux 7 Server Kickstart x86_64 7.9", product: "Red Hat Enterprise Linux Server" }
-    - { name: "Red Hat Satellite Tools 6 Beta for RHEL 7 Server RPMs x86_64", product: "Red Hat Enterprise Linux Server" }
+    - { name: "Red Hat Satellite Tools 6.10 for RHEL 7 Server RPMs x86_64", product: "Red Hat Enterprise Linux Server" }
     - { name: "Red Hat Software Collections RPMs for Red Hat Enterprise Linux 7 Server x86_64 7Server", product: "Red Hat Software Collections (for RHEL Server)" }
 
-- name: cv-capsule-beta
+# The stuff needed for a Satellite Capsule
+- name: "cv_capsule_x86_64"
   repositories:
-    - { name: "Red Hat Satellite Capsule 6 Beta for RHEL 7 Server RPMs x86_64", product: "Red Hat Satellite Capsule Beta" }
+    - { name: "Red Hat Satellite Capsule 6.10 for RHEL 7 Server RPMs x86_64", product: "Red Hat Satellite Capsule" }
     - { name: "Red Hat Ansible Engine 2.9 RPMs for Red Hat Enterprise Linux 7 Server x86_64", product: "Red Hat Ansible Engine" }
-    - { name: "Red Hat Satellite Maintenance 6 Beta for RHEL 7 Server RPMs x86_64", product: "Red Hat Enterprise Linux Server" }
+    - { name: "Red Hat Satellite Maintenance 6 for RHEL 7 Server RPMs x86_64", product: "Red Hat Enterprise Linux Server" }
 
-- name: "cv-rhel8-x86_64"
+# RHEL 8 latest
+- name: "cv_rhel8_latest_x86_64"
   repositories:
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS Kickstart 8.4', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream Kickstart 8.4', product: 'Red Hat Enterprise Linux for x86_64' }
@@ -270,22 +299,40 @@ content_views:
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream RPMs 8', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Satellite Tools 6.9 for RHEL 8 x86_64 RPMs', product: 'Red Hat Enterprise Linux for x86_64' }
 
+# Fixed minor releases for SAP systems (Update Services for SAP Solution, e4s)
+- name: "cv_rhel8_relver_x86_64"
+  repositories:
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS Kickstart 8.4', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream Kickstart 8.4', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS RPMs 8.4', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream RPMs 8.4', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - SAP NetWeaver - Update Services for SAP Solutions RPMs 8.4', product: 'RHEL for SAP - Update Services for SAP Solutions'   }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - High Availability - Update Services for SAP Solutions RPMs 8.4', product: 'Red Hat Enterprise Linux High Availability - U  pdate Services for SAP Solutions' } 
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream - Update Services for SAP Solutions RPMs 8.4', product: 'Red Hat Enterprise Linux Server - Update Services for   SAP Solutions' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS - Update Services for SAP Solutions RPMs 8.4', product: 'Red Hat Enterprise Linux Server - Update Services for SAP   Solutions' }
+    - { name: 'Red Hat Satellite Tools 6.10 for RHEL 8 x86_64 - Update Services SAP Solutions RPMs 8.4', product: 'Red Hat Enterprise Linux Server - Update Services for SAP Sol  utions' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - SAP Solutions - Update Services for SAP Solutions RPMs 8.4', product: 'RHEL for SAP HANA - Update Services for SAP Soluti  ons' }
+
 # Define Composite content views
 ccv:
-- name: 'ccv-rhel8-x86_64-generic'
+- name: 'ccv_rhel8_lastest_x86_64'
   cv:
-    - 'cv-rhel8-x86_64'
+    - 'cv_rhel8_latest_x86_64'
 
-- name: ccv-rhel7-capsule-beta
+- name: "ccv_rhel8_relver_x86_64"
   cv:
-    - cv-rhel7-x86_64
-    - cv-capsule-beta
+    - "cv_rhel8_relver_x86_64"
+
+- name: 'ccv_rhel7_capsule_x86_64'
+  cv:
+    - "cv-rhel7-x86_64"
+    - "cv_capsule_x86_64"
 
 # Define host collections
 host_collections:
-- rhel8
-- dev_servers
-- prod_servers
+- "rhel8"
+- "dev_servers"
+- "prod_servers"
 
 # Define Hostgroups
 hostgroups:
@@ -309,7 +356,7 @@ hostgroups:
   ptable: 01-kickstart-default
   lifecycle_environment: prod
   content_source: "{{ sat_hostname }}"
-  content_view: ccv-rhel8-x86_64-generic
+  content_view: "ccv_rhel8_relver_x86_64"
 
 - name: generic
   parent: "BER/prod"
@@ -325,7 +372,7 @@ hostgroups:
   operatingsystem: "RedHat 8.4"
   ptable: 01-kickstart-default
   lifecycle_environment: prod
-  content_view: ccv-rhel8-x86_64-generic
+  content_view: "ccv_rhel8_lastest_x86_64"
 
 # Define activation keys
 activation_keys:
