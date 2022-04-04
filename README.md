@@ -15,11 +15,20 @@ it's just for the initial configuration
 At the moment, the Playbook covers the most important topics for getting a Satellite up and running
 
 ## Compatibility
-This version of the playbook was tested to be working with Satellite Version 6.8 and 6.9.
-For Satellite 6.10 beta, at least currently, in the vars.yml you need to set the operatingsystem to i.e. "RedHat-8.4", while it is "RedHat 8.4" for older Satellites
+This version of the playbook was tested to be working with Satellite Version 6.10. Older versions of Statellite need some minor changes in the vars.yml
 
 ## Prerequisites
-* Subscribe the system, add the required repositories as described in the document https://access.redhat.com/documentation/en-us/red_hat_satellite/6.9/html-single/installing_satellite_server_from_a_connected_network/index
+* Subscribe the system, and ensure to meet the requirements like sizing and firewall rules as described here: https://access.redhat.com/documentation/en-us/red_hat_satellite/6.10/html-single/installing_satellite_server_from_a_connected_network/index
+* Shortcut for lab systems:
+	* subscription-manager list --all --available --matches 'Red Hat Satellite Infrastructure Subscription'
+	* subscription-manager attach --pool=pool_id
+	* subscription-manager repos --disable "*"
+	* subscription-manager repos --enable=rhel-7-server-rpms \
+--enable=rhel-7-server-satellite-6.10-rpms \
+--enable=rhel-7-server-satellite-maintenance-6-rpms \
+--enable=rhel-server-rhscl-7-rpms \
+--enable=rhel-7-server-ansible-2.9-rpms
+	* yum -y update && reboot
 * Install the Satellite,python2-jmespath and the Ansible collection for Red hat Satellite: *yum -y install satellite ansible-collection-redhat-satellite python2-jmespath*
 * Satellite Installer was run with the enabledment of the TFTP feature:
 *satellite-installer --scenario satellite --foreman-initial-organization=lab --foreman-proxy-tftp=true*
