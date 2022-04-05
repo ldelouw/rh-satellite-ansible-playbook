@@ -1,2 +1,5 @@
 ---
 # defaults file for manifest
+satellite_rhn_username: "admin"
+satellite_rhn_password: "{{ lookup('env', 'RHN_PASSWORD') }}"
+satellite_manifest_uuid: "0101010101-0101-1010-0101-101010101010"
