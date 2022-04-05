@@ -17,6 +17,9 @@ sat_user: "admin"
 # If you provided another location during the Satellite installation, change it
 organization: "lab"
 
+# Where the manifest is stored
+manifest_path: /tmp
+
 lifecycle_paths:
   - - label: dev
     - label: test
