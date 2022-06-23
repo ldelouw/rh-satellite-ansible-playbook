@@ -24,10 +24,12 @@
     - role: settings
     - role: gpg-keys
       tags: gpg-keys
-    - role: syncplans
-      tags: syncplans
     - role: repos
       tags: repos
+    - role: syncplans
+      tags: syncplans
+    - role: 3rdpartyrepos
+      tags: 3rdpartyrepos
     - role: environments
       tags: environments
     - role: content-views

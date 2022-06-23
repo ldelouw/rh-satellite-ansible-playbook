@@ -99,8 +99,8 @@ products:
 - "Red Hat Enterprise Linux for x86_64"
 
 # RHEL 8 update services for SAP (e4s)
-- "Red Hat Enterprise Linux Server - Update Services for SAP Solutions"
-- "Red Hat Enterprise Linux High Availability - Update Services for SAP Solutions"
+- "Red Hat Enterprise Linux for SAP Applications for x86_64 - Update Services for SAP Solutions"
+- "Red Hat Enterprise Linux High Availability for x86_64 - Update Services for SAP Solutions"
 
 # RHEL 7 (Yes, it has a different Product name than that one for RHEL 7)
 - "Red Hat Enterprise Linux Server"
@@ -122,6 +122,14 @@ redhat_kickstart_repos:
 - label: "rhel-8-for-x86_64-appstream-kickstart"
   repos:
   - { releasever: "8.4" }
+
+- label: "rhel-9-for-x86_64-baseos-kickstart"
+  repos:
+  - { releasever: "9.0" }
+
+- label: "rhel-9-for-x86_64-appstream-kickstart"
+  repos:
+  - { releasever: "9.0" }
 
 redhat_os_repos:
 - label: "rhel-7-server-rpms"
@@ -189,6 +197,15 @@ redhat_os_repos:
 - label: "satellite-tools-6.10-for-rhel-8-x86_64-rpms"
   repos:
     - { }
+
+- label: "rhel-9-for-x86_64-baseos-rpms"
+  repos:
+    - { releasever: "9" }
+
+- label: "rhel-9-for-x86_64-appstream-rpms"
+  repos:
+    - { releasever: "9" }
+
 
 # Update Services for SAP Solutions (e4s)
 - label: "rhel-8-for-x86_64-baseos-e4s-rpms"
@@ -300,7 +317,7 @@ content_views:
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream Kickstart 8.4', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS RPMs 8', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream RPMs 8', product: 'Red Hat Enterprise Linux for x86_64' }
-    - { name: 'Red Hat Satellite Tools 6.9 for RHEL 8 x86_64 RPMs', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Satellite Tools 6.10 for RHEL 8 x86_64 RPMs', product: 'Red Hat Enterprise Linux for x86_64' }
 
 # Fixed minor releases for SAP systems (Update Services for SAP Solution, e4s)
 - name: "cv_rhel8_relver_x86_64"
@@ -316,6 +333,13 @@ content_views:
     - { name: 'Red Hat Satellite Tools 6.10 for RHEL 8 x86_64 - Update Services SAP Solutions RPMs 8.4', product: 'Red Hat Enterprise Linux Server - Update Services for SAP Sol  utions' }
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - SAP Solutions - Update Services for SAP Solutions RPMs 8.4', product: 'RHEL for SAP HANA - Update Services for SAP Soluti  ons' }
 
+- name: "cv_rhel9_latest_x86_64"
+  repositories:
+    - { name: 'Red Hat Enterprise Linux 9 for x86_64 - BaseOS Kickstart 9.0', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Enterprise Linux 9 for x86_64 - AppStream Kickstart 9.0', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Enterprise Linux 9 for x86_64 - AppStream RPMs 9', product: 'Red Hat Enterprise Linux for x86_64' }
+
 # Define Composite content views
 ccv:
 - name: 'ccv_rhel8_lastest_x86_64'
@@ -325,6 +349,10 @@ ccv:
 - name: "ccv_rhel8_relver_x86_64"
   cv:
     - "cv_rhel8_relver_x86_64"
+
+- name: 'ccv_rhel9_lastest_x86_64'
+  cv:
+    - 'cv_rhel9_latest_x86_64'
 
 - name: 'ccv_rhel7_capsule_x86_64'
   cv:
@@ -377,6 +405,15 @@ hostgroups:
   lifecycle_environment: prod
   content_view: "ccv_rhel8_lastest_x86_64"
 
+- name: rhel9
+  parent: "BER/prod/generic"
+  location: "BER"
+  architecture: x86_64
+  operatingsystem: "RedHat 9.0"
+  ptable: 01-kickstart-default
+  lifecycle_environment: prod
+  content_view: "ccv_rhel9_lastest_x86_64"
+
 # Define activation keys
 activation_keys:
   - name: "ak-rhel8-generic-test"
@@ -404,3 +441,17 @@ activation_keys:
         override: enabled
       - label: "whatever-repo"
         override: enabled
+
+  - name: "ak-rhel9-generic-test"
+    lifecycle_environment: "test"
+    subscriptions:
+      - name: "Red Hat Subscription Name"
+      - name: "Red Hat Subscription Name 2"
+      - name: "{{ organization }}_oss"
+    content_view: "ccv_rhel9_lastest_x86_64"
+#    content_overrides:
+#      - label: "satellite-tools-6.11-for-rhel-9-x86_64-rpms"
+##        override: enabled
+#      - label: "whatever-repo"
+#        override: enabled
+
