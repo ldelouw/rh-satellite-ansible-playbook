@@ -1,0 +1,28 @@
+---
+- name: 3rd Party products
+  redhat.satellite.product:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    organization: "{{ organization }}"
+    name: "{{ item.name }}"
+    sync_plan: "{{ sync_plan }}"
+    state: present
+  loop: "{{ additional_products }}"
+  tags: 3rd_party_products
+
+- name: "3rd Party repos"
+  redhat.satellite.repository:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    organization: "{{ organization }}"
+    name: "{{ item.name }}"
+    content_type: "yum"
+    url: "{{ item.url|default(omit) }}"
+    http_proxy_policy: "{{ item.http_proxy_policy|default(omit) }}"
+    gpg_key: "{{ item.gpg_key|default(omit) }}"
+    product: "{{ item.product }}"
+    mirror_on_sync: false
+  loop: "{{ additional_repos }}"
+  tags: 3rd_party_repos
