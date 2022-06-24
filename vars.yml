@@ -422,7 +422,7 @@ activation_keys:
       - name: "Red Hat Subscription Name"
       - name: "Red Hat Subscription Name 2"
       - name: "{{ organization }}_oss"
-    content_view: "ccv-rhel8-x86_64-generic"
+    content_view: "ccv_rhel8_lastest_x86_64"
     content_overrides:
       - label: "satellite-tools-6.10-for-rhel-8-x86_64-rpms"
         override: enabled
@@ -435,7 +435,7 @@ activation_keys:
       - name: "Red Hat Subscription Name"
       - name: "Red Hat Subscription Name 2"
       - name: "{{ organization }}_oss"
-    content_view: "ccv-rhel8-x86_64-generic"
+    content_view: "ccv_rhel8_lastest_x86_64"
     content_overrides:
       - label: "satellite-tools-6.10-for-rhel-8-x86_64-rpms"
         override: enabled
