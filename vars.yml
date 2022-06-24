@@ -99,7 +99,8 @@ products:
 - "Red Hat Enterprise Linux for x86_64"
 
 # RHEL 8 update services for SAP (e4s)
-- "Red Hat Enterprise Linux for SAP Applications for x86_64 - Update Services for SAP Solutions"
+- "Red Hat Enterprise Linux for SAP Solutions for x86_64 - Update Services for SAP Solutions"
+- "Red Hat Enterprise Linux for x86_64 - Update Services for SAP Solutions"     
 - "Red Hat Enterprise Linux High Availability for x86_64 - Update Services for SAP Solutions"
 
 # RHEL 7 (Yes, it has a different Product name than that one for RHEL 7)
@@ -206,12 +207,12 @@ redhat_os_repos:
   repos:
     - { releasever: "9" }
 
-
 # Update Services for SAP Solutions (e4s)
+
 - label: "rhel-8-for-x86_64-baseos-e4s-rpms"
   repos:
     - { releasever: "8.4" }
-                                                                                
+
 - label: "rhel-8-for-x86_64-appstream-e4s-rpms"
   repos:
     - { releasever: "8.4" }
@@ -226,7 +227,7 @@ redhat_os_repos:
 
 - label: "rhel-8-for-x86_64-sap-solutions-e4s-rpms"
   repos:
-    - { releasever: "8.2" }
+    - { releasever: "8.4" }
 
 - label: "satellite-tools-6.10-for-rhel-8-x86_64-e4s-rpms"
   repos:
@@ -320,19 +321,17 @@ content_views:
     - { name: 'Red Hat Satellite Tools 6.10 for RHEL 8 x86_64 RPMs', product: 'Red Hat Enterprise Linux for x86_64' }
 
 # Fixed minor releases for SAP systems (Update Services for SAP Solution, e4s)
-- name: "cv_rhel8_relver_x86_64"
-  repositories:
+- name: "cv_rhel8_relver_x86_64"                                                
+  repositories:                                                                 
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS Kickstart 8.4', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream Kickstart 8.4', product: 'Red Hat Enterprise Linux for x86_64' }
-    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS RPMs 8.4', product: 'Red Hat Enterprise Linux for x86_64' }
-    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream RPMs 8.4', product: 'Red Hat Enterprise Linux for x86_64' }
-    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - SAP NetWeaver - Update Services for SAP Solutions RPMs 8.4', product: 'RHEL for SAP - Update Services for SAP Solutions'   }
-    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - High Availability - Update Services for SAP Solutions RPMs 8.4', product: 'Red Hat Enterprise Linux High Availability - U  pdate Services for SAP Solutions' } 
-    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream - Update Services for SAP Solutions RPMs 8.4', product: 'Red Hat Enterprise Linux Server - Update Services for   SAP Solutions' }
-    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS - Update Services for SAP Solutions RPMs 8.4', product: 'Red Hat Enterprise Linux Server - Update Services for SAP   Solutions' }
-    - { name: 'Red Hat Satellite Tools 6.10 for RHEL 8 x86_64 - Update Services SAP Solutions RPMs 8.4', product: 'Red Hat Enterprise Linux Server - Update Services for SAP Sol  utions' }
-    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - SAP Solutions - Update Services for SAP Solutions RPMs 8.4', product: 'RHEL for SAP HANA - Update Services for SAP Soluti  ons' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - SAP Solutions - Update Services for SAP Solutions RPMs 8.4', product: 'Red Hat Enterprise Linux for SAP Solutions for x86_64 - Update Services for SAP Solutions' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS - Update Services for SAP Solutions RPMs 8.4', product: 'Red Hat Enterprise Linux for x86_64 - Update Services for SAP Solutions' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream - Update Services for SAP Solutions RPMs 8.4', product: 'Red Hat Enterprise Linux for x86_64 - Update Services for SAP Solutions' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - High Availability - Update Services for SAP Solutions RPMs 8.4', product: 'Red Hat Enterprise Linux High Availability for x86_64 - Update Services for SAP Solutions' }
+    - { name: 'Red Hat Satellite Tools 6.10 for RHEL 8 x86_64 - Update Services SAP Solutions RPMs 8.4', product: 'Red Hat Enterprise Linux for x86_64 - Update Services for SAP Solutions' }
 
+# RHEL 9 latest
 - name: "cv_rhel9_latest_x86_64"
   repositories:
     - { name: 'Red Hat Enterprise Linux 9 for x86_64 - BaseOS Kickstart 9.0', product: 'Red Hat Enterprise Linux for x86_64' }
@@ -362,6 +361,7 @@ ccv:
 # Define host collections
 host_collections:
 - "rhel8"
+- "rhel9"
 - "dev_servers"
 - "prod_servers"
 
