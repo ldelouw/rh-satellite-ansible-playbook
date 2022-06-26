@@ -15,5 +15,8 @@
     content_source: "{{ item.content_source|default(omit) }}"
     medium: "{{ item.medium|default(omit) }}"
     locations: "{{ item.locations|default(omit) }}"
+    subnet: "{{ item.subnet|default(omit) }}"
+    domain: "{{ item.domain|default(omit) }}"
+    realm: "{{ item.realm|default(omit) }}"
   loop: "{{ hostgroups }}"
   tags: hostgroups

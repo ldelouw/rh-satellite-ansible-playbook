@@ -1,0 +1,15 @@
+---
+# tasks file for realm
+- name: "Create {{ realm_name }} Realm"
+  redhat.satellite.realm:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    name: "{{ realm_name }}"
+    realm_proxy: "{{ sat_hostname }}"
+    realm_type: "Red Hat Identity Management"
+    state: present
+    locations: "{{ locations }}"
+  when: realm_name is defined
+  tags:
+    - realm

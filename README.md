@@ -37,7 +37,7 @@ This version of the playbook was tested to be working with Satellite Version 6.1
 ## Things *NOT* set up:
 For security reasons (I dont want to accidentially leak some real life credentials)
 * Register and subscribe the Satellite to Redhat CDN
-* Setting up an IPA Realm
+* Setting up an IPA Realm, you need to join the Satellite manually
 * Setting up a libvirt compute resource, however, an example is provided but commented out
 
 For technical reasons

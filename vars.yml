@@ -40,6 +40,16 @@ locations:
   - NUE
   - BER
 
+# Creates a realm if the variable is defined, ignored when
+# not defined
+
+# Note that the Satetellite server must be joined
+# to the domain before running this playbook.
+# Please refer to the documentation here:
+# https://access.redhat.com/documentation/en-us/red_hat_satellite/6.10/html-single/administering_red_hat_satellite/index
+# in chapter 13.7
+realm_name: LDELOUW.CH
+
 # Change this to True if you made an inital sync of all repositories, this
 # is a manual task as it can take multiple hours to complete
 # synced: True
@@ -404,6 +414,9 @@ hostgroups:
   ptable: 01-kickstart-default
   lifecycle_environment: prod
   content_view: "ccv_rhel8_lastest_x86_64"
+  realm: "{{ realm_name}}"
+  subnet: "vlan100"
+  domain: "ldelouw.ch"
 
 - name: rhel9
   parent: "BER/prod/generic"
@@ -413,6 +426,7 @@ hostgroups:
   ptable: 01-kickstart-default
   lifecycle_environment: prod
   content_view: "ccv_rhel9_lastest_x86_64"
+  realm: "{{ realm_name}}"
 
 # Define activation keys
 activation_keys:

@@ -44,6 +44,8 @@
       tags: domains
     - role: subnets
       tags: subnets
+    - role: realms
+      tags: realms
   # - role: compute-resources
   #   tags: compute-resources
     - role: host-groups
