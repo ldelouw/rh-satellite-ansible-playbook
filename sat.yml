@@ -1,3 +1,4 @@
+---
 - hosts: all
   vars_files:
   - vars.yml
@@ -52,10 +53,11 @@
       tags: host-groups
     - role: activationkeys
       tags: activationkeys
+    - role: global_parameters
+      tags: global_parameters
 
   pre_tasks:
     - name: Copy manifest to target Satellite
       copy:
         src: "~/manifest.zip"
         dest: /root/manifest.zip
- 

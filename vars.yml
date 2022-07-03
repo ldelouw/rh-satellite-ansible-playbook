@@ -40,6 +40,17 @@ locations:
   - NUE
   - BER
 
+# Global Parameters
+global_parameters:
+- { name: "keyboard", value: "ch" }
+- { name: "lang", value: "en_US.UTF-8" }
+- { name: "time-zone", value: "Europe/Berlin" }
+- { name: "selinux", value: "enforcing" }
+- { name: "package_upgrade", value: "false" }
+- { name: "host_registration_insights", value: "false" }
+- { name: "bootloader-append", value: "nofb" }
+- { name: "disable-firewall", value: "false" }
+
 # Creates a realm if the variable is defined, ignored when
 # not defined
 
