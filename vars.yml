@@ -426,6 +426,7 @@ hostgroups:
   lifecycle_environment: prod
   content_view: "ccv_rhel8_lastest_x86_64"
   realm: "{{ realm_name}}"
+  activationkeys: "ak-rhel8-generic-prod"
   subnet: "vlan100"
   domain: "ldelouw.ch"
 

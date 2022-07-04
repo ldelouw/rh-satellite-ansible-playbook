@@ -18,5 +18,6 @@
     subnet: "{{ item.subnet|default(omit) }}"
     domain: "{{ item.domain|default(omit) }}"
     realm: "{{ item.realm|default(omit) }}"
+    activation_keys: "{{ item.activationkeys|default(omit) }}"
   loop: "{{ hostgroups }}"
   tags: hostgroups
