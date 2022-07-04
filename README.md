@@ -32,6 +32,7 @@ This version of the playbook was tested to be working with Satellite Version 6.1
 * Install the Satellite,python2-jmespath and the Ansible collection for Red hat Satellite: *yum -y install satellite ansible-collection-redhat-satellite python2-jmespath git*
 * Satellite Installer was run with the enabledment of the TFTP feature:
 *satellite-installer --scenario satellite --foreman-initial-organization=lab --foreman-proxy-tftp=true*
+* If you want to use OpenSCAP for compiance checking, run *foreman-rake foreman_openscap:bulk_upload:default*
 * Clone this repo: *git clone https://github.com/ldelouw/rh-satellite-ansible-playbook.git*
 
 ## Things *NOT* set up:
