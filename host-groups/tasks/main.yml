@@ -19,5 +19,6 @@
     domain: "{{ item.domain|default(omit) }}"
     realm: "{{ item.realm|default(omit) }}"
     activation_keys: "{{ item.activationkeys|default(omit) }}"
+    openscap_proxy: "{{ item.openscap_proxy|default(omit) }}"
   loop: "{{ hostgroups }}"
   tags: hostgroups

@@ -427,6 +427,7 @@ hostgroups:
   content_view: "ccv_rhel8_lastest_x86_64"
   realm: "{{ realm_name}}"
   activationkeys: "ak-rhel8-generic-prod"
+  openscap_proxy: "{{ sat_hostname }}"
   subnet: "vlan100"
   domain: "ldelouw.ch"
 
