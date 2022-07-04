@@ -15,5 +15,6 @@
     password: "{{ sat_passwd }}"
     server_url: "{{ sat_url }}"
     locations: "{{ locations }}"
+    remote_execution_proxies: "{{ item.remote_execution_proxies|default(omit) }}"
   loop: "{{ subnets }}"
   tags: subnets
