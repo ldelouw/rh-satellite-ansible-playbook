@@ -5,6 +5,12 @@
     dest: /root/01-kickstart-default-ptable.erb
     mode: 0644
 
+- name: "Copy partition table to Satellite"
+  copy:
+    src: "files/02-kickstart-default-ptable.erb"
+    dest: /root/02-kickstart-default-efi-ptable.erb
+    mode: 0644
+
 - name: "Create Partition Template 01-kickstart-default-ptable"
   redhat.satellite.partition_table:
     username: "{{ sat_user }}"
@@ -13,6 +19,19 @@
     organizations: "{{ organization }}"
     name: 01-kickstart-default
     file_name: ~/01-kickstart-default-ptable.erb
+    os_family: Redhat
+    state: present
+    locations: "{{ locations }}"
+  tags: ptable
+
+- name: "Create Partition Template 02-kickstart-default-efi-ptable"
+  redhat.satellite.partition_table:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    organizations: "{{ organization }}"
+    name: 02-kickstart-default-efi
+    file_name: ~/02-kickstart-default-efi-ptable.erb
     os_family: Redhat
     state: present
     locations: "{{ locations }}"

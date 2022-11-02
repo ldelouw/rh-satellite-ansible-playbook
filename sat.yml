@@ -22,7 +22,7 @@
       tags: firewalld
     - role: locations
     - role: proxy
-    - role: settings
+    - role: sat-settings
     - role: gpg-keys
       tags: gpg-keys
     - role: repos

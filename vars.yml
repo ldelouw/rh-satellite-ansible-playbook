@@ -362,7 +362,7 @@ content_views:
 
 # Define Composite content views
 ccv:
-- name: 'ccv_rhel8_lastest_x86_64'
+- name: 'ccv_rhel8_latest_x86_64'
   cv:
     - 'cv_rhel8_latest_x86_64'
 
@@ -370,7 +370,7 @@ ccv:
   cv:
     - "cv_rhel8_relver_x86_64"
 
-- name: 'ccv_rhel9_lastest_x86_64'
+- name: 'ccv_rhel9_latest_x86_64'
   cv:
     - 'cv_rhel9_latest_x86_64'
 
@@ -424,7 +424,7 @@ hostgroups:
   operatingsystem: "RedHat 8.4"
   ptable: 01-kickstart-default
   lifecycle_environment: prod
-  content_view: "ccv_rhel8_lastest_x86_64"
+  content_view: "ccv_rhel8_latest_x86_64"
   realm: "{{ realm_name}}"
   activationkeys: "ak-rhel8-generic-prod"
   openscap_proxy: "{{ sat_hostname }}"
@@ -438,7 +438,7 @@ hostgroups:
   operatingsystem: "RedHat 9.0"
   ptable: 01-kickstart-default
   lifecycle_environment: prod
-  content_view: "ccv_rhel9_lastest_x86_64"
+  content_view: "ccv_rhel9_latest_x86_64"
   realm: "{{ realm_name}}"
 
 # Define activation keys
@@ -449,7 +449,7 @@ activation_keys:
       - name: "Red Hat Subscription Name"
       - name: "Red Hat Subscription Name 2"
       - name: "{{ organization }}_oss"
-    content_view: "ccv_rhel8_lastest_x86_64"
+    content_view: "ccv_rhel8_latest_x86_64"
     content_overrides:
       - label: "satellite-tools-6.10-for-rhel-8-x86_64-rpms"
         override: enabled
@@ -462,7 +462,7 @@ activation_keys:
       - name: "Red Hat Subscription Name"
       - name: "Red Hat Subscription Name 2"
       - name: "{{ organization }}_oss"
-    content_view: "ccv_rhel8_lastest_x86_64"
+    content_view: "ccv_rhel8_latest_x86_64"
     content_overrides:
       - label: "satellite-tools-6.10-for-rhel-8-x86_64-rpms"
         override: enabled
@@ -475,7 +475,7 @@ activation_keys:
       - name: "Red Hat Subscription Name"
       - name: "Red Hat Subscription Name 2"
       - name: "{{ organization }}_oss"
-    content_view: "ccv_rhel9_lastest_x86_64"
+    content_view: "ccv_rhel9_latest_x86_64"
 #    content_overrides:
 #      - label: "satellite-tools-6.11-for-rhel-9-x86_64-rpms"
 ##        override: enabled
