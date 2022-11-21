@@ -101,7 +101,7 @@ domains:
 # Define Subnets
 subnets:
   - { name: "vlan100", network: "192.168.100.0", mask: "255.255.255.0", gateway: "192.168.100.1", dns_primary: "192.168.100.1", domains: "example.com", from_ip: "192.168.100.100", to_ip: "192.168.100.200", boot_mode: "Static", tftp_proxy: "{{ sat_hostname }}", remote_execution_proxies: "{{ sat_hostname }}" }
-  - { name: "vlan101", network: "192.168.101.0", mask: "255.255.255.0", gateway: "192.168.101.1", dns_primary: "192.168.101.1", domains: "example.net", from_ip: "192.168.101.100", to_ip: "192.168.101.200", boot_mode: "Static", tftp_proxy: "{{ sat_hostname }}" }
+  - { name: "vlan101", network: "192.168.101.0", mask: "255.255.255.0", gateway: "192.168.101.1", dns_primary: "192.168.101.1", dns_secondary: "1.1.1.1", domains: "example.net", from_ip: "192.168.101.100", to_ip: "192.168.101.200", boot_mode: "Static", tftp_proxy: "{{ sat_hostname }}" }
 
 # Red Hat Repositories to be enabled
 # Instructions:
@@ -131,6 +131,9 @@ products:
 - "Red Hat Ansible Engine"
 - "Red Hat Software Collections (for RHEL Server)"
 - "Red Hat Satellite Capsule"
+
+# RHEL 8 Capsule
+# TODO
 
 redhat_kickstart_repos:
 - label: "rhel-7-server-kickstart"
@@ -220,6 +223,16 @@ redhat_os_repos:
   repos:
     - { }
 
+# RHEL 8 Capsule stuff
+- label: "satellite-capsule-6.11-for-rhel-8-x86_64-rpms"
+  repos:
+    - { }
+
+- label: "satellite-maintenance-6.11-for-rhel-8-x86_64-rpms"
+  repos:
+    - { }
+
+# RHEL 9 repos
 - label: "rhel-9-for-x86_64-baseos-rpms"
   repos:
     - { releasever: "9" }
@@ -341,9 +354,9 @@ content_views:
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream RPMs 8', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Satellite Tools 6.10 for RHEL 8 x86_64 RPMs', product: 'Red Hat Enterprise Linux for x86_64' }
 
-# Fixed minor releases for SAP systems (Update Services for SAP Solution, e4s)
-- name: "cv_rhel8_relver_x86_64"                                                
-  repositories:                                                                 
+# Locked minor releases for SAP systems (Update Services for SAP Solution, e4s)
+- name: "cv_rhel8_relver_x86_64"
+  repositories:
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS Kickstart 8.4', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream Kickstart 8.4', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - SAP Solutions - Update Services for SAP Solutions RPMs 8.4', product: 'Red Hat Enterprise Linux for SAP Solutions for x86_64 - Update Services for SAP Solutions' }
