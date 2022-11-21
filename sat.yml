@@ -41,8 +41,8 @@
       tags: ptable
     - role: os
       tags: os
-    - role: domains
-      tags: domains
+    - role: sat-domains
+      tags: sat-domains
     - role: subnets
       tags: subnets
     - role: realms
