@@ -43,8 +43,8 @@
       tags: os
     - role: sat-domains
       tags: sat-domains
-    - role: subnets
-      tags: subnets
+    - role: sat-subnets
+      tags: sat-subnets
     - role: realms
       tags: realms
   # - role: compute-resources
