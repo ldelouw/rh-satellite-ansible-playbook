@@ -1,5 +1,5 @@
 ---
-- name: "Ensure OS 8.4 configured"
+- name: "Ensure defined OS configured"
   redhat.satellite.operatingsystem:
     username: "{{ sat_user }}"
     password: "{{ sat_passwd }}"
@@ -7,7 +7,7 @@
     name: "RedHat"
     family: Redhat
     major: 8
-    minor: 4
+    minor: 6
     ptables:
       - 01-kickstart-default
       - "Kickstart default"
