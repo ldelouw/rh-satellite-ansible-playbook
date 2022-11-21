@@ -1,0 +1,1 @@
+ensure os/tasks/main.yml does not use hardcoded OS versions
