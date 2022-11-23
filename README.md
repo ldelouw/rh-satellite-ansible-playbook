@@ -65,10 +65,10 @@ To be done
 * Configuring Capsule servers
 
 ## How to use
-First of all, edit the vars.yml file, replace everything with example.com 
+First of all, copy the vars.yml.dist to vars.yml and edit the file, replace everything with example.com 
 with your real life environment. Please also read the comments for better understanding
 
-Alter that, the passwd.yml vault password needs to be changed with *ansible-vault rekey passwd.yml*, the password is *changeme*. Edit the passwd.yml file with *ansible-vault edit passwd.yml* and use your real Satellite password and if needed uncomment the default_http_proxy_passwd and change to the real world Proxy password
+Alter that, copy the passwd.yml.dist to passwd.yml and change the vault password with *ansible-vault rekey passwd.yml*, the password is *changeme*. Edit the passwd.yml file with *ansible-vault edit passwd.yml* and use your real Satellite password and if needed uncomment the default_http_proxy_passwd and change to the real world Proxy password
 
 Then, simply run it with *ansible-playbook sat.yml --ask-vault*
 
