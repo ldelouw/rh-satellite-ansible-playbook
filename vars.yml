@@ -57,9 +57,14 @@ global_parameters:
 # Note that the Satetellite server must be joined
 # to the domain before running this playbook.
 # Please refer to the documentation here:
-# https://access.redhat.com/documentation/en-us/red_hat_satellite/6.10/html-single/administering_red_hat_satellite/index
-# in chapter 13.7
-realm_name: LDELOUW.CH
+# https://access.redhat.com/documentation/en-us/red_hat_satellite/6.12/html-single/administering_red_hat_satellite/index#Configuring_External_Authentication_admin
+# in chapter 16.7
+# Note that you need to join the Server first to the IPA domain and preparing
+# the Satellite for the realm feature is a manual task
+# with foreman-prepare-realm
+# When not used, just comment the realm related stuff, please also see 
+# the host groups section
+# realm_name: EXAMPLE.COM
 
 # Change this to True if you made an inital sync of all repositories, this
 # is a manual task as it can take multiple hours to complete
@@ -127,13 +132,9 @@ products:
 # RHEL 7 (Yes, it has a different Product name than that one for RHEL 7)
 - "Red Hat Enterprise Linux Server"
 
-# RHEL 7 Capsule
-- "Red Hat Ansible Engine"
+# RHEL 8 Capsule
 - "Red Hat Software Collections (for RHEL Server)"
 - "Red Hat Satellite Capsule"
-
-# RHEL 8 Capsule
-# TODO
 
 redhat_kickstart_repos:
 - label: "rhel-7-server-kickstart"
@@ -142,19 +143,19 @@ redhat_kickstart_repos:
 
 - label: "rhel-8-for-x86_64-baseos-kickstart"
   repos:
-  - { releasever: "8.4" }
+  - { releasever: "8.6" }
 
 - label: "rhel-8-for-x86_64-appstream-kickstart"
   repos:
-  - { releasever: "8.4" }
+  - { releasever: "8.6" }
 
 - label: "rhel-9-for-x86_64-baseos-kickstart"
   repos:
-  - { releasever: "9.0" }
+  - { releasever: "9.1" }
 
 - label: "rhel-9-for-x86_64-appstream-kickstart"
   repos:
-  - { releasever: "9.0" }
+  - { releasever: "9.1" }
 
 redhat_os_repos:
 - label: "rhel-7-server-rpms"
@@ -165,21 +166,9 @@ redhat_os_repos:
   repos:
     - { releasever: "7Server", basearch: "x86_64" }
 
-- label: "rhel-7-server-satellite-capsule-6.10-rpms"
-  repos:
-    - { basearch: "x86_64" }
-
-- label: "rhel-7-server-satellite-maintenance-6-rpms"
-  repos:
-    - { basearch: "x86_64" }
-
-- label: "rhel-7-server-satellite-tools-6.10-rpms"
-  repos:
-    - { basearch: "x86_64" }
-
-- label: "rhel-7-server-ansible-2.9-rpms"
-  repos:
-    - { basearch: "x86_64" }
+#- label: "satellite-client-6-for-rhel-7-x86_64-rpms"
+#  repos:
+#    - { }
 
 - label:  "rhel-7-server-optional-rpms"
   repos:
@@ -192,10 +181,6 @@ redhat_os_repos:
 - label:  "rhel-7-server-supplementary-rpms"
   repos:
     - { releasever: "7Server", basearch: "x86_64" }
-
-- label: "rhel-7-server-satellite-tools-6.10-rpms"
-  repos:
-    - { basearch: "x86_64" }
 
 # Example for Extended Update Suppoer repositories (EUS)
 # only use them if you have a strong business case
@@ -219,16 +204,16 @@ redhat_os_repos:
   repos:
     - { releasever: "8" }
 
-- label: "satellite-tools-6.10-for-rhel-8-x86_64-rpms"
+- label: "satellite-client-6-for-rhel-8-x86_64-rpms"
   repos:
     - { }
 
 # RHEL 8 Capsule stuff
-- label: "satellite-capsule-6.11-for-rhel-8-x86_64-rpms"
+- label: "satellite-capsule-6.12-for-rhel-8-x86_64-rpms"
   repos:
     - { }
 
-- label: "satellite-maintenance-6.11-for-rhel-8-x86_64-rpms"
+- label: "satellite-maintenance-6.12-for-rhel-8-x86_64-rpms"
   repos:
     - { }
 
@@ -245,54 +230,27 @@ redhat_os_repos:
 
 - label: "rhel-8-for-x86_64-baseos-e4s-rpms"
   repos:
-    - { releasever: "8.4" }
+    - { releasever: "8.6" }
 
 - label: "rhel-8-for-x86_64-appstream-e4s-rpms"
   repos:
-    - { releasever: "8.4" }
+    - { releasever: "8.6" }
 
 - label: "rhel-8-for-x86_64-highavailability-e4s-rpms"
   repos:
-    - { releasever: "8.4" }
+    - { releasever: "8.6" }
 
 - label: "rhel-8-for-x86_64-sap-netweaver-e4s-rpms"
   repos:
-    - { releasever: "8.4" }
+    - { releasever: "8.6" }
 
 - label: "rhel-8-for-x86_64-sap-solutions-e4s-rpms"
   repos:
-    - { releasever: "8.4" }
+    - { releasever: "8.6" }
 
-- label: "satellite-tools-6.10-for-rhel-8-x86_64-e4s-rpms"
+- label: "satellite-client-6-for-rhel-8-x86_64-e4s-rpms"
   repos:
-    - { releasever: "8.4" }
-
-# For future usage when RHEL 8.6 e4s is released
-# proceed accordingly with the content views as well
-
-# - label: "rhel-8-for-x86_64-baseos-e4s-rpms"
-#  repos:
-#    - { releasever: "8.6" }
-
-# - label: "rhel-8-for-x86_64-appstream-e4s-rpms"
-#  repos:
-#    - { releasever: "8.6" }
-
-# - label: "rhel-8-for-x86_64-highavailability-e4s-rpms"
-#  repos:
-#    - { releasever: "8.6" }
-
-# - label: "rhel-8-for-x86_64-sap-netweaver-e4s-rpms"
-#  repos:
-#    - { releasever: "8.6" }
-
-# - label: "rhel-8-for-x86_64-sap-solutions-e4s-rpms"
-#  repos:
-#    - { releasever: "8.6" }
-
-# - label: "satellite-tools-6.10-for-rhel-8-x86_64-e4s-rpms"
-#  repos:
-#    - { releasever: "8.6" }
+    - { releasever: "8.6" }
 
 # Define an interval for the sync plan
 sync_plan: daily
@@ -335,41 +293,40 @@ content_views:
   repositories:
     - { name: "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server", product: "Red Hat Enterprise Linux Server" }
     - { name: "Red Hat Enterprise Linux 7 Server Kickstart x86_64 7.9", product: "Red Hat Enterprise Linux Server" }
-    - { name: "Red Hat Satellite Tools 6.10 for RHEL 7 Server RPMs x86_64", product: "Red Hat Enterprise Linux Server" }
+#    - { name: "Red Hat Satellite Client 6 for RHEL 7 Server RPMs x86_64", product: "Red Hat Enterprise Linux Server" }
     - { name: "Red Hat Software Collections RPMs for Red Hat Enterprise Linux 7 Server x86_64 7Server", product: "Red Hat Software Collections (for RHEL Server)" }
 
-# The stuff needed for a Satellite Capsule
+# The stuff needed for a Satellite Capsule 6.12 RHEL8
 - name: "cv_capsule_x86_64"
   repositories:
-    - { name: "Red Hat Satellite Capsule 6.10 for RHEL 7 Server RPMs x86_64", product: "Red Hat Satellite Capsule" }
-    - { name: "Red Hat Ansible Engine 2.9 RPMs for Red Hat Enterprise Linux 7 Server x86_64", product: "Red Hat Ansible Engine" }
-    - { name: "Red Hat Satellite Maintenance 6 for RHEL 7 Server RPMs x86_64", product: "Red Hat Enterprise Linux Server" }
+    - { name: "Red Hat Satellite Capsule 6.12 for RHEL 8 x86_64 RPMS", product: "Red Hat Satellite Capsule" }
+    - { name: "Red Hat Satellite Maintenance 6.12 for RHEL 8 x86_64 RPMS", product: "Red Hat Enterprise Linux for x86_64" }
 
 # RHEL 8 latest
 - name: "cv_rhel8_latest_x86_64"
   repositories:
-    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS Kickstart 8.4', product: 'Red Hat Enterprise Linux for x86_64' }
-    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream Kickstart 8.4', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS Kickstart 8.6', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream Kickstart 8.6', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS RPMs 8', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream RPMs 8', product: 'Red Hat Enterprise Linux for x86_64' }
-    - { name: 'Red Hat Satellite Tools 6.10 for RHEL 8 x86_64 RPMs', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Satellite Client 6 for RHEL 8 x86_64 RPMs', product: 'Red Hat Enterprise Linux for x86_64' }
 
 # Locked minor releases for SAP systems (Update Services for SAP Solution, e4s)
 - name: "cv_rhel8_relver_x86_64"
   repositories:
-    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS Kickstart 8.4', product: 'Red Hat Enterprise Linux for x86_64' }
-    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream Kickstart 8.4', product: 'Red Hat Enterprise Linux for x86_64' }
-    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - SAP Solutions - Update Services for SAP Solutions RPMs 8.4', product: 'Red Hat Enterprise Linux for SAP Solutions for x86_64 - Update Services for SAP Solutions' }
-    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS - Update Services for SAP Solutions RPMs 8.4', product: 'Red Hat Enterprise Linux for x86_64 - Update Services for SAP Solutions' }
-    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream - Update Services for SAP Solutions RPMs 8.4', product: 'Red Hat Enterprise Linux for x86_64 - Update Services for SAP Solutions' }
-    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - High Availability - Update Services for SAP Solutions RPMs 8.4', product: 'Red Hat Enterprise Linux High Availability for x86_64 - Update Services for SAP Solutions' }
-    - { name: 'Red Hat Satellite Tools 6.10 for RHEL 8 x86_64 - Update Services SAP Solutions RPMs 8.4', product: 'Red Hat Enterprise Linux for x86_64 - Update Services for SAP Solutions' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS Kickstart 8.6', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream Kickstart 8.6', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - SAP Solutions - Update Services for SAP Solutions RPMs 8.6', product: 'Red Hat Enterprise Linux for SAP Solutions for x86_64 - Update Services for SAP Solutions' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS - Update Services for SAP Solutions RPMs 8.6', product: 'Red Hat Enterprise Linux for x86_64 - Update Services for SAP Solutions' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream - Update Services for SAP Solutions RPMs 8.6', product: 'Red Hat Enterprise Linux for x86_64 - Update Services for SAP Solutions' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - High Availability - Update Services for SAP Solutions RPMs 8.6', product: 'Red Hat Enterprise Linux High Availability for x86_64 - Update Services for SAP Solutions' }
+    - { name: 'Red Hat Satellite Client 6 for RHEL 8 x86_64 - Update Services for SAP Solutions RPMs 8.6', product: 'Red Hat Enterprise Linux for x86_64 - Update Services for SAP Solutions' }
 
 # RHEL 9 latest
 - name: "cv_rhel9_latest_x86_64"
   repositories:
-    - { name: 'Red Hat Enterprise Linux 9 for x86_64 - BaseOS Kickstart 9.0', product: 'Red Hat Enterprise Linux for x86_64' }
-    - { name: 'Red Hat Enterprise Linux 9 for x86_64 - AppStream Kickstart 9.0', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Enterprise Linux 9 for x86_64 - BaseOS Kickstart 9.1', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Enterprise Linux 9 for x86_64 - AppStream Kickstart 9.1', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Enterprise Linux 9 for x86_64 - AppStream RPMs 9', product: 'Red Hat Enterprise Linux for x86_64' }
 
@@ -387,9 +344,9 @@ ccv:
   cv:
     - 'cv_rhel9_latest_x86_64'
 
-- name: 'ccv_rhel7_capsule_x86_64'
+- name: 'ccv_rhel8_capsule_x86_64'
   cv:
-    - "cv-rhel7-x86_64"
+    - "cv_rhel8_latest_x86_64"
     - "cv_capsule_x86_64"
 
 # Define host collections
@@ -417,7 +374,7 @@ hostgroups:
   parent: "BER/prod/sap"
   locations: "BER"
   architecture: "x86_64"
-  operatingsystem: "RedHat 8.4"
+  operatingsystem: "RedHat 8.6"
   ptable: 01-kickstart-default
   lifecycle_environment: prod
   content_source: "{{ sat_hostname }}"
@@ -434,64 +391,70 @@ hostgroups:
   parent: "BER/prod/generic"
   location: "BER"
   architecture: x86_64
-  operatingsystem: "RedHat 8.4"
+  operatingsystem: "RedHat 8.6"
   ptable: 01-kickstart-default
   lifecycle_environment: prod
   content_view: "ccv_rhel8_latest_x86_64"
-  realm: "{{ realm_name}}"
+#  realm: "{{ realm_name}}"
   activationkeys: "ak-rhel8-generic-prod"
   openscap_proxy: "{{ sat_hostname }}"
   subnet: "vlan100"
-  domain: "ldelouw.ch"
+  domain: "example.com
 
 - name: rhel9
   parent: "BER/prod/generic"
   location: "BER"
   architecture: x86_64
-  operatingsystem: "RedHat 9.0"
+  operatingsystem: "RedHat 9.1"
   ptable: 01-kickstart-default
   lifecycle_environment: prod
   content_view: "ccv_rhel9_latest_x86_64"
-  realm: "{{ realm_name}}"
+#  realm: "{{ realm_name}}"
 
 # Define activation keys
+
+# Note: Standard config is to use Simple Content Access (SCA)
+# When SCA is enabled, you must not provide any subscription
+# configuration.
+# When disabling SCA, you must provide subscription config
+
 activation_keys:
   - name: "ak-rhel8-generic-test"
     lifecycle_environment: "test"
-    subscriptions:
-      - name: "Red Hat Subscription Name"
-      - name: "Red Hat Subscription Name 2"
-      - name: "{{ organization }}_oss"
+#    subscriptions:
+#      - name: "Red Hat Subscription Name"
+#      - name: "Red Hat Subscription Name 2"
+#      - name: "{{ organization }}_oss"
     content_view: "ccv_rhel8_latest_x86_64"
     content_overrides:
-      - label: "satellite-tools-6.10-for-rhel-8-x86_64-rpms"
+      - label: "satellite-client-6-for-rhel-8-x86_64-rpms"
         override: enabled
-      - label: "whatever-repo"
-        override: enabled
+#      - label: "whatever-repo"
+#        override: enabled
 
   - name: "ak-rhel8-generic-prod"
     lifecycle_environment: "prod"
-    subscriptions:
-      - name: "Red Hat Subscription Name"
-      - name: "Red Hat Subscription Name 2"
-      - name: "{{ organization }}_oss"
+#    subscriptions:
+#      - name: "Red Hat Subscription Name"
+#      - name: "Red Hat Subscription Name 2"
+#      - name: "{{ organization }}_oss"
     content_view: "ccv_rhel8_latest_x86_64"
     content_overrides:
-      - label: "satellite-tools-6.10-for-rhel-8-x86_64-rpms"
+      - label: "satellite-client-6-for-rhel-8-x86_64-rpms"
         override: enabled
-      - label: "whatever-repo"
-        override: enabled
+#      - label: "whatever-repo"
+#        override: enabled
 
   - name: "ak-rhel9-generic-test"
     lifecycle_environment: "test"
-    subscriptions:
-      - name: "Red Hat Subscription Name"
-      - name: "Red Hat Subscription Name 2"
-      - name: "{{ organization }}_oss"
+#    subscriptions:
+#      - name: "Red Hat Subscription Name"
+#      - name: "Red Hat Subscription Name 2"
+#      - name: "{{ organization }}_oss"
     content_view: "ccv_rhel9_latest_x86_64"
-#    content_overrides:
-#      - label: "satellite-tools-6.11-for-rhel-9-x86_64-rpms"
-##        override: enabled
+    content_overrides:
+      - label: "satellite-client-6-for-rhel-9-x86_64-rpms"
+        override: enabled
 #      - label: "whatever-repo"
 #        override: enabled
 

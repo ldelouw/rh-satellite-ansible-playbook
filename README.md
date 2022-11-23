@@ -15,7 +15,7 @@ it's just for the initial configuration
 At the moment, the Playbook covers the most important topics for getting a Satellite up and running
 
 ## Compatibility
-This version of the playbook was tested to be working with Satellite Version 6.10. Older versions of Statellite need some minor changes in the vars.yml
+This version of the playbook was tested to be working with Satellite Version 6.12. Older versions of Statellite need some minor changes in the vars.yml as well as the software requirements
 
 ## Prerequisites
 * Subscribe the system, and ensure to meet the requirements like sizing and firewall rules as described here: https://access.redhat.com/documentation/en-us/red_hat_satellite/6.10/html-single/installing_satellite_server_from_a_connected_network/index
@@ -23,15 +23,22 @@ This version of the playbook was tested to be working with Satellite Version 6.1
 	* subscription-manager list --all --available --matches 'Red Hat Satellite Infrastructure Subscription'
 	* subscription-manager attach --pool=pool_id
 	* subscription-manager repos --disable "*"
-	* subscription-manager repos --enable=rhel-7-server-rpms \
---enable=rhel-7-server-satellite-6.10-rpms \
---enable=rhel-7-server-satellite-maintenance-6-rpms \
---enable=rhel-server-rhscl-7-rpms \
---enable=rhel-7-server-ansible-2.9-rpms
+    * subscription-manager repos --enable=rhel-8-for-x86_64-baseos-rpms \
+--enable=rhel-8-for-x86_64-appstream-rpms \
+--enable=satellite-6.12-for-rhel-8-x86_64-rpms \
+--enable=satellite-maintenance-6.12-for-rhel-8-x86_64-rpms
+    * dnf module enable satellite:el8
 	* yum -y update && reboot
-* Install the Satellite,python2-jmespath and the Ansible collection for Red hat Satellite: *yum -y install satellite ansible-collection-redhat-satellite python2-jmespath git*
+* Install the EPEL repository (Note: Not suppoerted by Red Hat)
+    *dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm*
+* Install the Satellite,python39-jmespath.noarch and the Ansible collection for Red hat Satellite: *dnf -y install satellite ansible-collection-redhat-satellite python39-jmespath.noarch git*
+* Install some Ansible modules
+    *dnf install ansible-collection-ansible-posix.noarch ansible-collection-community-general.noarch*
+* **IMPORTANT!** Disable EPEL on Red Hat Satellite Systems as there are conflicting packages!
+    *dnf config-manager --set-disabled epel*
+
 * Satellite Installer was run with the enabledment of the TFTP feature:
-*satellite-installer --scenario satellite --foreman-initial-organization=lab --foreman-proxy-tftp=true*
+    *satellite-installer --scenario satellite --foreman-initial-organization=lab --foreman-proxy-tftp=true*
 * If you want to use OpenSCAP for compiance checking, run *foreman-rake foreman_openscap:bulk_upload:default*
 * Clone this repo: *git clone https://github.com/ldelouw/rh-satellite-ansible-playbook.git*
 
