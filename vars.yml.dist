@@ -277,11 +277,14 @@ additional_products:
   - name: "{{ organization }}_proprietary"
 
 additional_repos:
-#  - name: "epel7"
-#    url: "https://ftp.tu-chemnitz.de/pub/linux/fedora-epel/7/x86_64/"
+# Example for an internal repository where not proxy should be used
+#  - name: "internal-repo"
+#    url: "https://internal.example-com/some/repo"
 #    product: "{{ organization }}_oss"
+#    gpg_key: RPM-GPG-KEY-INTERNAL
+#    http_proxy_policy: "none"
 
-# Please change the EPEL URL to you closest mirror server
+# EPEL URL to be changed to your closest mirror server
   - name: "epel8"
     url: "https://ftp.tu-chemnitz.de/pub/linux/fedora-epel/8/Everything/x86_64/"
     product: "{{ organization }}_oss"
