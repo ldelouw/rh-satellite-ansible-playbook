@@ -24,5 +24,6 @@
     gpg_key: "{{ item.gpg_key|default(omit) }}"
     product: "{{ item.product }}"
     mirror_on_sync: false
+    os_version: {{ item.os_version|default(omit) }}
   loop: "{{ additional_repos }}"
   tags: 3rd_party_repos
