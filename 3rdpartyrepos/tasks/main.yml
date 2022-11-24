@@ -23,7 +23,9 @@
     http_proxy_policy: "{{ item.http_proxy_policy|default(omit) }}"
     gpg_key: "{{ item.gpg_key|default(omit) }}"
     product: "{{ item.product }}"
-    mirror_on_sync: false
-    os_version: {{ item.os_version|default(omit) }}
+    mirror_on_sync: "{{ item.mirror_on_sync|default(false) }}"
+    os_version: "{{ item.os_version|default(omit) }}"
+    unprotected: "{{ item.unprotected|default(omit) }}"
+    download_policy: "{{ item.download_policy|default(omit) }}"
   loop: "{{ additional_repos }}"
   tags: 3rd_party_repos
