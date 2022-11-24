@@ -6,7 +6,7 @@
         --extra-vars or in the vars.yml file. Re-run the playbook to continue"
   when: synced is not defined
 
-- name: "Content Views (w/o Composite Content views)"
+- name: "Create Content Views (w/o Composite Content views)"
   redhat.satellite.content_view:
     username: "{{ sat_user }}"
     password: "{{ sat_passwd }}"
@@ -16,9 +16,8 @@
     repositories: "{{ item.repositories }}"
   loop: "{{ content_views }}"
   tags: content_views
-  register: cv_changed
 
-- name: "Composite Content Views"
+- name: "Create Composite Content Views"
   redhat.satellite.content_view:
     username: "{{ sat_user }}"
     password: "{{ sat_passwd }}"
@@ -31,37 +30,3 @@
   vars:
     j_query: "[*].{ content_view: @, latest: 'true' }"
   tags: ccv
-
-- name: Publish CV when changed
-  redhat.satellite.content_view_version:
-    username: "{{ sat_user }}"
-    password: "{{ sat_passwd }}"
-    server_url: "{{ sat_url }}"
-    organization: "{{ organization }}"
-    content_view: "{{ item.name }}"
-    lifecycle_environments: "Library"
-  when: cv_changed.changed
-  loop: "{{ content_views }}"
-  tags: cv_publish
-
-- name: Publish CCV when changed
-  redhat.satellite.content_view_version:
-    username: "{{ sat_user }}"
-    password: "{{ sat_passwd }}"
-    server_url: "{{ sat_url }}"
-    organization: "{{ organization }}"
-    content_view: "{{ item.name }}"
-    lifecycle_environments: "Library"
-  when: cv_changed.changed
-  loop: "{{ ccv }}"
-  tags: cv_publish
-
-- name: "Publish composite content views and promote it to test -> prod"
-  redhat.satellite.content_view_version:
-    username: "{{ sat_user }}"
-    password: "{{ sat_passwd }}"
-    server_url: "{{ sat_url }}"
-    content_view: "{{ item.name }}"
-    organization: "{{ organization }}"
-    lifecycle_environments: "{{ lifecycle_environments }}"
-  loop: "{{ ccv }}"
