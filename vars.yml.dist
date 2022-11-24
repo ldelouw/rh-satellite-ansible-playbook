@@ -79,6 +79,8 @@ publish: false
 # default_http_proxy_url: "http://proxy.example.com:3128"
 # default_http_proxy_user: proxy_user
 # default_http_proxy_passwd: Please use the encrypted passwd.yml vault file
+#
+# TODO: Define no proxy stuff
 
 # This defines if the packages should be downloaded immediately or on demand.
 # Possible values on_demand, which is the default, and immediate
@@ -283,6 +285,7 @@ additional_repos:
   - name: "epel8"
     url: "https://ftp.tu-chemnitz.de/pub/linux/fedora-epel/8/Everything/x86_64/"
     product: "{{ organization }}_oss"
+    os_version: "rhel-8"
     gpg_key: RPM-GPG-KEY-EPEL-8
 
 # Define content views
