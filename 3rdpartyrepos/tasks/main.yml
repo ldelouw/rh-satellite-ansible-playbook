@@ -21,6 +21,7 @@
     content_type: "yum"
     url: "{{ item.url|default(omit) }}"
     http_proxy_policy: "{{ item.http_proxy_policy|default(omit) }}"
+    http_proxy: "{{ item.http_proxy|default(omit) }}"
     gpg_key: "{{ item.gpg_key|default(omit) }}"
     product: "{{ item.product }}"
     mirror_on_sync: "{{ item.mirror_on_sync|default(false) }}"
