@@ -55,6 +55,11 @@
       tags: activationkeys
     - role: global_parameters
       tags: global_parameters
+    - role: sat-ldap-auth
+      tags: ldap-auth
+    - role: sat-usergroups
+      tags: usergroups
+
 
   pre_tasks:
     - name: Copy manifest to target Satellite
