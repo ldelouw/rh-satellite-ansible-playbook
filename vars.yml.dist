@@ -81,8 +81,6 @@ publish: false
 # default_http_proxy_passwd: Please use the encrypted passwd.yml vault file
 # default_http_proxy_except_list: ["10.*","172.16*","192.168.*","example.com","*.example.com","server.example.com","*.server.example.com"]
 #
-# TODO: Define no proxy stuff
-
 # This defines if the packages should be downloaded immediately or on demand.
 # Possible values on_demand, which is the default, and immediate
 rh_repo_download_policy: on_demand
@@ -406,7 +404,7 @@ hostgroups:
   activationkeys: "ak-rhel8-generic-prod"
   openscap_proxy: "{{ sat_hostname }}"
   subnet: "vlan100"
-  domain: "example.com
+  domain: "example.com"
 
 - name: rhel9
   parent: "BER/prod/generic"

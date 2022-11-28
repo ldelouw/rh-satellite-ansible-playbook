@@ -1,1 +1,3 @@
 ensure os/tasks/main.yml does not use hardcoded OS versions
+
+validate_certs: "{{ sat_validate_certs }}" in base variables in all roles
