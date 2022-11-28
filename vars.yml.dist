@@ -468,7 +468,7 @@ ldap_auth:
   - name: "LDAP Server"
     host: "ldap.example.com"
     account: "cn=binduser,ou=sysusers,dc=example,dc=com"
-    account_password: "{{ ldap_auth_passwords.ldap.example.com }}"
+    account_password: "{{ ldap_auth_password1 }}"
     base_dn: "dc=example,dc=com"
     groups_base: "ou=groups,dc=example,dc=com"
     ldap_filter: ""
