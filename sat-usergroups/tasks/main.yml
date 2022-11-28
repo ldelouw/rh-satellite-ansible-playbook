@@ -1,0 +1,24 @@
+---
+- name: Define usergroups
+  redhat.satellite.usergroup:
+    name: "{{ item.name }}"
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    admin: "{{ item.admin }}"
+    roles: "{{ item.roles|default(omit) }}"
+    state: "{{ item.state|default(omit) }}"
+  loop: "{{ usergroups }}"
+  tags: usergroups
+
+- name: Map usergroups to ldap groups if ldap group given
+  redhat.satellite.external_usergroup:
+    name: "{{ item.external_group_name }}"
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    auth_source: "{{ item.auth_source }}"
+    usergroup: "{{ item.name }}"
+  when: item.external_group_name is defined
+  loop: "{{ usergroups }}"
+  tags: usergroups

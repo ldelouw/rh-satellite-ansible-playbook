@@ -1,0 +1,27 @@
+---
+- name: Define ldap auth
+  redhat.satellite.auth_source_ldap:
+    name: "{{ item.name }}"
+    locations: "{{ item.locations|default(omit) }}"
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    organizations: "{{ organization }}"
+    host: "{{ item.host }}"
+    onthefly_register: "{{ item.onthefly_register|default(omit) }}"
+    account: "{{ item.account }}"
+    account_password: "{{ item.account_password }}"
+    base_dn: "{{ item.base_dn }}"
+    groups_base: "{{ item.groups_base }}"
+    ldap_filter : "{{ item.ldap_filter }}"
+    tls: "{{ item.tls }}"
+    validate_certs: "{{ item.validate_certs }}"
+    server_type: "{{ item.server_type }}"
+    port: "{{ item.port }}"
+    attr_firstname: "{{ item.attr_firstname|default(omit) }}"
+    attr_lastname: "{{ item.attr_lastname|default(omit) }}"
+    attr_login: "{{ item.attr_login|default(omit) }}"
+    attr_mail: "{{ item.attr_mail|default(omit) }}"
+  loop: "{{ ldap_auth }}"
+  tags: ldap-auth
+  no_log: True
