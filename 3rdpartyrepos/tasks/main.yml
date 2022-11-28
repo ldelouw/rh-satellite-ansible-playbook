@@ -25,7 +25,7 @@
     gpg_key: "{{ item.gpg_key|default(omit) }}"
     product: "{{ item.product }}"
     mirror_on_sync: "{{ item.mirror_on_sync|default(false) }}"
-    os_version: "{{ item.os_version|default(omit) }}"
+    os_versions: "{{ item.os_version|default(omit) }}"
     unprotected: "{{ item.unprotected|default(omit) }}"
     download_policy: "{{ item.download_policy|default(omit) }}"
   loop: "{{ additional_repos }}"
