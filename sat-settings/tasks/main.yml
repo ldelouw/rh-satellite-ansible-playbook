@@ -11,6 +11,15 @@
     - proxy
     - settings
 
+- name: Set default proxy exceptions
+  redhat.satellite.setting:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    name: "http_proxy_except_list"
+    value: "{{ default_http_proxy_except_list }}"
+  when: default_http_proxy_except_list is defined
+
 - name: Set default content proxy to be used
   redhat.satellite.setting:
     username: "{{ sat_user }}"

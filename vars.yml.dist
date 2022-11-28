@@ -79,6 +79,7 @@ publish: false
 # default_http_proxy_url: "http://proxy.example.com:3128"
 # default_http_proxy_user: proxy_user
 # default_http_proxy_passwd: Please use the encrypted passwd.yml vault file
+# default_http_proxy_except_list: ["10.*","172.16*","192.168.*","example.com","*.example.com","server.example.com","*.server.example.com"]
 #
 # TODO: Define no proxy stuff
 
