@@ -13,7 +13,7 @@
     account_password: "{{ item.account_password }}"
     base_dn: "{{ item.base_dn }}"
     groups_base: "{{ item.groups_base }}"
-    ldap_filter : "{{ item.ldap_filter }}"
+    ldap_filter: "{{ item.ldap_filter }}"
     tls: "{{ item.tls }}"
     validate_certs: "{{ item.validate_certs }}"
     server_type: "{{ item.server_type }}"
