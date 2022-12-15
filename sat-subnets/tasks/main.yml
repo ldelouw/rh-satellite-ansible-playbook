@@ -7,6 +7,7 @@
     gateway: "{{ item.gateway }}"
     domains: "{{ item.domains }}"
     dns_primary: "{{ item.dns_primary }}"
+    dns_secondary: "{{ item.dns_secondary|default(omit) }}"
     from_ip: "{{ item.from_ip|default(omit) }}"
     to_ip: "{{ item.to_ip|default(omit) }}"
     boot_mode: "{{ item.boot_mode }}"
