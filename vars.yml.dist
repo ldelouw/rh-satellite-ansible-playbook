@@ -93,6 +93,8 @@ custom_repo_download_policy: on_demand
 # syncing content. Default is on_demand
 capsule_repo_download_policy: on_demand
 
+# remote_execution_user: rexuser
+
 # Compute resource stuff as an example for libvirt, unused in the playbook
 libvirt_hv: "qemu+ssh://user@libvirt.example.com/system"
 libvirt_hypervisor_name: libvirt-hypervisor

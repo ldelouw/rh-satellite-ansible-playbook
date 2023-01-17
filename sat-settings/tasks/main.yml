@@ -67,3 +67,14 @@
   tags:
     - download_policy
     - settings
+
+- name: Set remote execution user to "{{ remote_execution_user }}"
+  redhat.satellite.setting:
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+    name: "remote_execution_user"
+    value: "{{ remote_execution_user }}"
+  when: remote_execution_user is defined
+  tags:
+    - settings
