@@ -1,10 +1,10 @@
----                                                                             
-- name: Manage Subnets                                                          
-  redhat.satellite.global_parameter:                                                      
-    name: "{{ item.name }}"                                                     
+---
+- name: Set global parameters
+  redhat.satellite.global_parameter:
+    name: "{{ item.name }}"
     value: "{{ item.value }}"
-    username: "{{ sat_user }}"                                                  
-    password: "{{ sat_passwd }}"                                                
-    server_url: "{{ sat_url }}"                                                 
-  loop: "{{ global_parameters }}"                                                         
+    username: "{{ sat_user }}"
+    password: "{{ sat_passwd }}"
+    server_url: "{{ sat_url }}"
+  loop: "{{ global_parameters }}"
   tags: global_parameters
