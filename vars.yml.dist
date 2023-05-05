@@ -134,9 +134,9 @@ products:
 
 # RHEL 7 (Yes, it has a different Product name than that one for RHEL 7)
 - "Red Hat Enterprise Linux Server"
+- "Red Hat Software Collections (for RHEL Server)"
 
 # RHEL 8 Capsule
-- "Red Hat Software Collections (for RHEL Server)"
 - "Red Hat Satellite Capsule"
 
 redhat_kickstart_repos:
@@ -169,10 +169,6 @@ redhat_os_repos:
   repos:
     - { releasever: "7Server", basearch: "x86_64" }
 
-#- label: "satellite-client-6-for-rhel-7-x86_64-rpms"
-#  repos:
-#    - { }
-
 - label:  "rhel-7-server-optional-rpms"
   repos:
     - { releasever: "7Server", basearch: "x86_64" }
@@ -184,6 +180,10 @@ redhat_os_repos:
 - label:  "rhel-7-server-supplementary-rpms"
   repos:
     - { releasever: "7Server", basearch: "x86_64" }
+
+ - label: "rhel-7-server-satellite-client-6-rpms"
+   repos:
+     - { basearch: "x86_64" }
 
 # Example for Extended Update Suppoer repositories (EUS)
 # only use them if you have a strong business case
@@ -212,11 +212,11 @@ redhat_os_repos:
     - { }
 
 # RHEL 8 Capsule stuff
-- label: "satellite-capsule-6.12-for-rhel-8-x86_64-rpms"
+- label: "satellite-capsule-6.13-for-rhel-8-x86_64-rpms"
   repos:
     - { }
 
-- label: "satellite-maintenance-6.12-for-rhel-8-x86_64-rpms"
+- label: "satellite-maintenance-6.13-for-rhel-8-x86_64-rpms"
   repos:
     - { }
 
@@ -300,14 +300,14 @@ content_views:
   repositories:
     - { name: "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server", product: "Red Hat Enterprise Linux Server" }
     - { name: "Red Hat Enterprise Linux 7 Server Kickstart x86_64 7.9", product: "Red Hat Enterprise Linux Server" }
-#    - { name: "Red Hat Satellite Client 6 for RHEL 7 Server RPMs x86_64", product: "Red Hat Enterprise Linux Server" }
+    - { name: "Red Hat Satellite Client 6 for RHEL 7 Server RPMs x86_64", product: "Red Hat Enterprise Linux Server" }
     - { name: "Red Hat Software Collections RPMs for Red Hat Enterprise Linux 7 Server x86_64 7Server", product: "Red Hat Software Collections (for RHEL Server)" }
 
-# The stuff needed for a Satellite Capsule 6.12 RHEL8
+# The stuff needed for a Satellite Capsule 6.13 RHEL8
 - name: "cv_capsule_x86_64"
   repositories:
-    - { name: "Red Hat Satellite Capsule 6.12 for RHEL 8 x86_64 RPMS", product: "Red Hat Satellite Capsule" }
-    - { name: "Red Hat Satellite Maintenance 6.12 for RHEL 8 x86_64 RPMS", product: "Red Hat Enterprise Linux for x86_64" }
+    - { name: "Red Hat Satellite Capsule 6.13 for RHEL 8 x86_64 RPMS", product: "Red Hat Satellite Capsule" }
+    - { name: "Red Hat Satellite Maintenance 6.13 for RHEL 8 x86_64 RPMS", product: "Red Hat Enterprise Linux for x86_64" }
 
 # RHEL 8 latest
 - name: "cv_rhel8_latest_x86_64"
@@ -351,7 +351,7 @@ ccv:
   cv:
     - 'cv_rhel9_latest_x86_64'
 
-- name: 'ccv_rhel8_capsule_x86_64'
+- name: 'ccv_capsule_x86_64'
   cv:
     - "cv_rhel8_latest_x86_64"
     - "cv_capsule_x86_64"
@@ -474,8 +474,8 @@ ldap_auth:
     base_dn: "dc=example,dc=com"
     groups_base: "ou=groups,dc=example,dc=com"
     ldap_filter: ""
-    tls: True
-    validate_certs: True
+    tls: true
+    validate_certs: true
     server_type: "posix"
     port: 636
     locations: "BER,NUE"
@@ -483,8 +483,8 @@ ldap_auth:
     attr_firstname: "givenName"
     attr_lastname: "sn"
     attr_mail: "mail"
-    onthefly_register: True
-#- { name: "AD Ressourcen", host: "", account: "", account_password: "", base_dn: "", groups_base: "", ldap_filter: "", tls: True, validate_certs: True, server_type: "active_directory", port: 636}
+    onthefly_register: true
+    # - { name: "AD Ressources", host: "", account: "", account_password: "", base_dn: "", groups_base: "", ldap_filter: "", tls: True, validate_certs: True, server_type: "active_directory", port: 636}
 
 usergroups:
   - { name: "Admin Group1", admin: True, auth_source: "LDAP Server", external_group_name: "admins" }
