@@ -181,9 +181,9 @@ redhat_os_repos:
   repos:
     - { releasever: "7Server", basearch: "x86_64" }
 
- - label: "rhel-7-server-satellite-client-6-rpms"
-   repos:
-     - { basearch: "x86_64" }
+- label: "rhel-7-server-satellite-client-6-rpms"
+  repos:
+    - { basearch: "x86_64" }
 
 # Example for Extended Update Suppoer repositories (EUS)
 # only use them if you have a strong business case
