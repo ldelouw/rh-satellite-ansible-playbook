@@ -306,8 +306,8 @@ content_views:
 # The stuff needed for a Satellite Capsule 6.13 RHEL8
 - name: "cv_capsule_x86_64"
   repositories:
-    - { name: "Red Hat Satellite Capsule 6.13 for RHEL 8 x86_64 RPMS", product: "Red Hat Satellite Capsule" }
-    - { name: "Red Hat Satellite Maintenance 6.13 for RHEL 8 x86_64 RPMS", product: "Red Hat Enterprise Linux for x86_64" }
+    - { name: "Red Hat Satellite Capsule 6.13 for RHEL 8 x86_64 RPMs", product: "Red Hat Satellite Capsule" }
+    - { name: "Red Hat Satellite Maintenance 6.13 for RHEL 8 x86_64 RPMs", product: "Red Hat Enterprise Linux for x86_64" }
 
 # RHEL 8 latest
 - name: "cv_rhel8_latest_x86_64"
