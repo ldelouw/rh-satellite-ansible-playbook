@@ -381,7 +381,7 @@ hostgroups:
   parent: "BER/prod/sap"
   locations: "BER"
   architecture: "x86_64"
-  operatingsystem: "RedHat 8.6"
+  operatingsystem: "RHEL 8.6"
   ptable: 01-kickstart-default
   lifecycle_environment: prod
   content_source: "{{ sat_hostname }}"
@@ -398,7 +398,7 @@ hostgroups:
   parent: "BER/prod/generic"
   location: "BER"
   architecture: x86_64
-  operatingsystem: "RedHat 8.6"
+  operatingsystem: "RHEL 8.6"
   ptable: 01-kickstart-default
   lifecycle_environment: prod
   content_view: "ccv_rhel8_latest_x86_64"
