@@ -466,28 +466,28 @@ activation_keys:
 #        override: enabled
 
 
-ldap_auth:
-  - name: "LDAP Server"
-    host: "ldap.example.com"
-    account: "cn=binduser,ou=sysusers,dc=example,dc=com"
-    account_password: "{{ ldap_auth_password1 }}"
-    base_dn: "dc=example,dc=com"
-    groups_base: "ou=groups,dc=example,dc=com"
-    ldap_filter: ""
-    tls: true
-    validate_certs: true
-    server_type: "posix"
-    port: 636
-    locations: "BER,NUE"
-    attr_login: "cn"
-    attr_firstname: "givenName"
-    attr_lastname: "sn"
-    attr_mail: "mail"
-    onthefly_register: true
+#ldap_auth:
+#  - name: "LDAP Server"
+#    host: "ldap.example.com"
+#    account: "cn=binduser,ou=sysusers,dc=example,dc=com"
+#    account_password: "{{ ldap_auth_password1 }}"
+#    base_dn: "dc=example,dc=com"
+#    groups_base: "ou=groups,dc=example,dc=com"
+#    ldap_filter: ""
+#    tls: true
+#    validate_certs: true
+#    server_type: "posix"
+#    port: 636
+#    locations: "BER,NUE"
+#    attr_login: "cn"
+#    attr_firstname: "givenName"
+#    attr_lastname: "sn"
+#    attr_mail: "mail"
+#    onthefly_register: true
     # - { name: "AD Ressources", host: "", account: "", account_password: "", base_dn: "", groups_base: "", ldap_filter: "", tls: True, validate_certs: True, server_type: "active_directory", port: 636}
 
-usergroups:
-  - { name: "Admin Group1", admin: True, auth_source: "LDAP Server", external_group_name: "admins" }
-  - { name: "Admin Group2", admin: True, auth_source: "LDAP Server", external_group_name: "satadmins" }
-  - { name: "Readonly", admin: False, roles: "Viewer", auth_source: "LDAP Server", external_group_name: "satviewers" }
-  - { name: "Testgroup", admin: False, roles: "Viewer" }
+#usergroups:
+#  - { name: "Admin Group1", admin: True, auth_source: "LDAP Server", external_group_name: "admins" }
+#  - { name: "Admin Group2", admin: True, auth_source: "LDAP Server", external_group_name: "satadmins" }
+#  - { name: "Readonly", admin: False, roles: "Viewer", auth_source: "LDAP Server", external_group_name: "satviewers" }
+#  - { name: "Testgroup", admin: False, roles: "Viewer" }

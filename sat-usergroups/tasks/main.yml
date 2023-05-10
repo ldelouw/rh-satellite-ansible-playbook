@@ -10,6 +10,7 @@
     state: "{{ item.state|default(omit) }}"
   loop: "{{ usergroups }}"
   tags: usergroups
+  when: usergroups is defined
 
 - name: Map usergroups to ldap groups if ldap group given
   redhat.satellite.external_usergroup:

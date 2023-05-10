@@ -25,3 +25,4 @@
   loop: "{{ ldap_auth }}"
   tags: ldap-auth
   no_log: True
+  when: host is defined
