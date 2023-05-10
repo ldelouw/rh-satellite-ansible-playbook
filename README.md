@@ -15,7 +15,7 @@ it's just for the initial configuration
 At the moment, the Playbook covers the most important topics for getting a Satellite up and running
 
 ## Compatibility
-This version of the playbook was tested to be working with Satellite Version 6.12. Older versions of Statellite need some minor changes in the vars.yml as well as the software requirements
+This version of the playbook was tested to be working with Satellite Version 6.13. Older versions of Statellite need some minor changes in the vars.yml as well as the software requirements
 
 ## Prerequisites
 * Subscribe the system, and ensure to meet the requirements like sizing and firewall rules as described here: https://access.redhat.com/documentation/en-us/red_hat_satellite/6.10/html-single/installing_satellite_server_from_a_connected_network/index
@@ -25,8 +25,8 @@ This version of the playbook was tested to be working with Satellite Version 6.1
 	* subscription-manager repos --disable "*"
     * subscription-manager repos --enable=rhel-8-for-x86_64-baseos-rpms \
 --enable=rhel-8-for-x86_64-appstream-rpms \
---enable=satellite-6.12-for-rhel-8-x86_64-rpms \
---enable=satellite-maintenance-6.12-for-rhel-8-x86_64-rpms
+--enable=satellite-6.13-for-rhel-8-x86_64-rpms \
+--enable=satellite-maintenance-6.13-for-rhel-8-x86_64-rpms
     * dnf module enable satellite:el8
 	* yum -y update && reboot
 * Install the EPEL repository (Note: Not suppoerted by Red Hat)
