@@ -7,7 +7,7 @@
     name: "RedHat"
     family: Redhat
     major: 8
-    minor: 6
+    minor: 7
     ptables:
       - 01-kickstart-default
       - "Kickstart default"
