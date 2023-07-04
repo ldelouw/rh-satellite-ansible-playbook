@@ -4,10 +4,10 @@
     username: "{{ sat_user }}"
     password: "{{ sat_passwd }}"
     server_url: "{{ sat_url }}"
-    name: "RedHat"
+    name: "RHEL"
     family: Redhat
     major: 8
-    minor: 7
+    minor: 6
     ptables:
       - 01-kickstart-default
       - "Kickstart default"
