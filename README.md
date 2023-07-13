@@ -31,9 +31,7 @@ This version of the playbook was tested to be working with Satellite Version 6.1
 	* yum -y update && reboot
 * Install the EPEL repository (Note: Not suppoerted by Red Hat)
     *dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm*
-* Install the Satellite,python39-jmespath.noarch and the Ansible collection for Red hat Satellite: *dnf -y install satellite ansible-collection-redhat-satellite python39-jmespath.noarch git*
-* Install some Ansible modules
-    *dnf install ansible-collection-ansible-posix.noarch ansible-collection-community-general.noarch*
+* Install the Satellite,python3.11-jmespath.noarch and the Ansible collection for Red hat Satellite: *dnf -y install satellite ansible-collection-redhat-satellite ansible-collection-ansible-posix.noarch ansible-collection-community-general.noarch python3.11-jmespath.noarch git*
 * **IMPORTANT!** Disable EPEL on Red Hat Satellite Systems as there are conflicting packages!
     *dnf config-manager --set-disabled epel*
 
