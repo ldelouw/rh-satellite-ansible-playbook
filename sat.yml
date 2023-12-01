@@ -20,7 +20,8 @@
 #    - role: manifest # That is not working due to a bug
     - role: firewalld
       tags: firewalld
-    - role: locations
+    - role: sat-locations
+      tags: locations
     - role: proxy
     - role: sat-settings
     - role: gpg-keys
