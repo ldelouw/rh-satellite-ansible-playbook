@@ -154,11 +154,11 @@ redhat_kickstart_repos:
 
 - label: "rhel-9-for-x86_64-baseos-kickstart"
   repos:
-  - { releasever: "9.1" }
+  - { releasever: "9.2" }
 
 - label: "rhel-9-for-x86_64-appstream-kickstart"
   repos:
-  - { releasever: "9.1" }
+  - { releasever: "9.2" }
 
 redhat_os_repos:
 - label: "rhel-7-server-rpms"
@@ -212,11 +212,11 @@ redhat_os_repos:
     - { }
 
 # RHEL 8 Capsule stuff
-- label: "satellite-capsule-6.13-for-rhel-8-x86_64-rpms"
+- label: "satellite-capsule-6.14-for-rhel-8-x86_64-rpms"
   repos:
     - { }
 
-- label: "satellite-maintenance-6.13-for-rhel-8-x86_64-rpms"
+- label: "satellite-maintenance-6.14-for-rhel-8-x86_64-rpms"
   repos:
     - { }
 
@@ -228,6 +228,10 @@ redhat_os_repos:
 - label: "rhel-9-for-x86_64-appstream-rpms"
   repos:
     - { releasever: "9" }
+
+- label: "satellite-client-6-for-rhel-9-x86_64-rpms"
+  repos:
+    - { }
 
 # Update Services for SAP Solutions (e4s)
 
