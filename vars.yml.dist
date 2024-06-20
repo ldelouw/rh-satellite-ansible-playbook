@@ -316,13 +316,13 @@ content_views:
 # RHEL 8 latest
 - name: "cv_rhel8_latest_x86_64"
   repositories:
-    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS Kickstart 8.6', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS Kickstart 8.10', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream Kickstart 8.6', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS RPMs 8', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream RPMs 8', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Satellite Client 6 for RHEL 8 x86_64 RPMs', product: 'Red Hat Enterprise Linux for x86_64' }
 
-# Locked minor releases for SAP systems (Update Services for SAP Solution, e4s)
+4 Locked minor releases for SAP systems (Update Services for SAP Solution, e4s)
 - name: "cv_rhel8_relver_x86_64"
   repositories:
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS Kickstart 8.10', product: 'Red Hat Enterprise Linux for x86_64' }
@@ -336,8 +336,8 @@ content_views:
 # RHEL 9 latest
 - name: "cv_rhel9_latest_x86_64"
   repositories:
-    - { name: 'Red Hat Enterprise Linux 9 for x86_64 - BaseOS Kickstart 9.1', product: 'Red Hat Enterprise Linux for x86_64' }
-    - { name: 'Red Hat Enterprise Linux 9 for x86_64 - AppStream Kickstart 9.1', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Enterprise Linux 9 for x86_64 - BaseOS Kickstart 9.4', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Enterprise Linux 9 for x86_64 - AppStream Kickstart 9.4', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Enterprise Linux 9 for x86_64 - AppStream RPMs 9', product: 'Red Hat Enterprise Linux for x86_64' }
 
