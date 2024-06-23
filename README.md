@@ -25,8 +25,8 @@ This version of the playbook was tested to be working with Satellite Version 6.1
 	* subscription-manager repos --disable "*"
     * subscription-manager repos --enable=rhel-8-for-x86_64-baseos-rpms \
 --enable=rhel-8-for-x86_64-appstream-rpms \
---enable=satellite-6.13-for-rhel-8-x86_64-rpms \
---enable=satellite-maintenance-6.13-for-rhel-8-x86_64-rpms
+--enable=satellite-6.15-for-rhel-8-x86_64-rpms \
+--enable=satellite-maintenance-6.15-for-rhel-8-x86_64-rpms
     * dnf module enable satellite:el8
 	* yum -y update && reboot
 * Install the EPEL repository (Note: Not suppoerted by Red Hat)
