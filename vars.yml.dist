@@ -322,7 +322,7 @@ content_views:
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream RPMs 8', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Satellite Client 6 for RHEL 8 x86_64 RPMs', product: 'Red Hat Enterprise Linux for x86_64' }
 
-4 Locked minor releases for SAP systems (Update Services for SAP Solution, e4s)
+# Locked minor releases for SAP systems (Update Services for SAP Solution, e4s)
 - name: "cv_rhel8_relver_x86_64"
   repositories:
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS Kickstart 8.10', product: 'Red Hat Enterprise Linux for x86_64' }
