@@ -27,13 +27,17 @@ This version of the playbook was tested to be working with Satellite Version 6.1
 --enable=rhel-8-for-x86_64-appstream-rpms \
 --enable=satellite-6.15-for-rhel-8-x86_64-rpms \
 --enable=satellite-maintenance-6.15-for-rhel-8-x86_64-rpms
-    * dnf module enable satellite:el8
-	* yum -y update && reboot
+	* dnf -y update && reboot
 * Install the EPEL repository (Note: Not suppoerted by Red Hat)
     *dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm*
-* Install the Satellite,python3.11-jmespath.noarch and the Ansible collection for Red hat Satellite: *dnf -y install satellite ansible-collection-redhat-satellite ansible-collection-ansible-posix.noarch ansible-collection-community-general.noarch python3.11-jmespath.noarch git*
+* Install the required package for this playbook: 
+  *dnf -y install ansible-collection-ansible-posix.noarch ansible-collection-community-general.noarch python3.11-jmespath.noarch git*
 * **IMPORTANT!** Disable EPEL on Red Hat Satellite Systems as there are conflicting packages!
     *dnf config-manager --set-disabled epel*
+
+* Install the Satellite Packages:
+    * dnf module enable satellite:el8
+    * dnf -y install satellite
 
 * Satellite Installer was run with the enabledment of the TFTP feature:
     *satellite-installer --scenario satellite --foreman-initial-organization=lab --foreman-proxy-tftp=true*
