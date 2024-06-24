@@ -455,7 +455,7 @@ activation_keys:
         override: enabled
     host_collections:
       - rhel8
-      - rhel0
+      - rhel9
 #      - label: "whatever-repo"
 #        override: enabled
 
