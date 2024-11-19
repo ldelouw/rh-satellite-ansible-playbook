@@ -237,27 +237,27 @@ redhat_os_repos:
 
 - label: "rhel-8-for-x86_64-baseos-e4s-rpms"
   repos:
-    - { releasever: "8.10" }
+    - { releasever: "8.0" }
 
 - label: "rhel-8-for-x86_64-appstream-e4s-rpms"
   repos:
-    - { releasever: "8.10" }
+    - { releasever: "8.8" }
 
 - label: "rhel-8-for-x86_64-highavailability-e4s-rpms"
   repos:
-    - { releasever: "8.10" }
+    - { releasever: "8.8" }
 
 - label: "rhel-8-for-x86_64-sap-netweaver-e4s-rpms"
   repos:
-    - { releasever: "8.10" }
+    - { releasever: "8.8" }
 
 - label: "rhel-8-for-x86_64-sap-solutions-e4s-rpms"
   repos:
-    - { releasever: "8.10" }
+    - { releasever: "8.8" }
 
 - label: "satellite-client-6-for-rhel-8-x86_64-e4s-rpms"
   repos:
-    - { releasever: "8.10" }
+    - { releasever: "8.8" }
 
 # Define an interval for the sync plan
 sync_plan: daily
