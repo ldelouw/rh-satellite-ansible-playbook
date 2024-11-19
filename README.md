@@ -18,25 +18,22 @@ At the moment, the Playbook covers the most important topics for getting a Satel
 This version of the playbook was tested to be working with Satellite Version 6.13. Older versions of Statellite need some minor changes in the vars.yml as well as the software requirements
 
 ## Prerequisites
-* Subscribe the system, and ensure to meet the requirements like sizing and firewall rules as described here: https://access.redhat.com/documentation/en-us/red_hat_satellite/6.10/html-single/installing_satellite_server_from_a_connected_network/index
+* Subscribe the system, and ensure to meet the requirements like sizing and firewall rules as described here: https://docs.redhat.com/en/documentation/red_hat_satellite/6.16/html-single/installing_satellite_server_in_a_connected_network_environment/index
 * Shortcut for lab systems:
-	* subscription-manager list --all --available --matches 'Red Hat Satellite Infrastructure Subscription'
-	* subscription-manager attach --pool=pool_id
 	* subscription-manager repos --disable "*"
-    * subscription-manager repos --enable=rhel-8-for-x86_64-baseos-rpms \
---enable=rhel-8-for-x86_64-appstream-rpms \
---enable=satellite-6.15-for-rhel-8-x86_64-rpms \
---enable=satellite-maintenance-6.15-for-rhel-8-x86_64-rpms
+    * subscription-manager repos --enable=rhel-9-for-x86_64-baseos-rpms \
+--enable=rhel-9-for-x86_64-appstream-rpms \
+--enable=satellite-6.16-for-rhel-9-x86_64-rpms \
+--enable=satellite-maintenance-6.16-for-rhel-9-x86_64-rpms
 	* dnf -y update && reboot
 * Install the EPEL repository (Note: Not suppoerted by Red Hat)
-    *dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm*
+    *dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm*
 * Install the required package for this playbook: 
-  *dnf -y install ansible-collection-ansible-posix.noarch ansible-collection-community-general.noarch python3.11-jmespath.noarch git*
+  *dnf -y install ansible-collection-ansible-posix.noarch ansible-collection-community-general.noarch  python3-jmespath.noarch git*
 * **IMPORTANT!** Disable EPEL on Red Hat Satellite Systems as there are conflicting packages!
     *dnf config-manager --set-disabled epel*
 
 * Install the Satellite Packages:
-    * dnf module enable satellite:el8
     * dnf -y install satellite
 
 * Satellite Installer was run with the enabledment of the TFTP feature:

@@ -212,11 +212,11 @@ redhat_os_repos:
     - { }
 
 # RHEL 8 Capsule stuff
-- label: "satellite-capsule-6.15-for-rhel-8-x86_64-rpms"
+- label: "satellite-capsule-6.16-for-rhel-9-x86_64-rpms"
   repos:
     - { }
 
-- label: "satellite-maintenance-6.15-for-rhel-8-x86_64-rpms"
+- label: "satellite-maintenance-6.16-for-rhel-9-x86_64-rpms"
   repos:
     - { }
 
@@ -307,11 +307,11 @@ content_views:
     - { name: "Red Hat Satellite Client 6 for RHEL 7 Server RPMs x86_64", product: "Red Hat Enterprise Linux Server" }
     - { name: "Red Hat Software Collections RPMs for Red Hat Enterprise Linux 7 Server x86_64 7Server", product: "Red Hat Software Collections (for RHEL Server)" }
 
-# The stuff needed for a Satellite Capsule 6.13 RHEL8
+# The stuff needed for a Satellite Capsule 6.13 RHEL9
 - name: "cv_capsule_x86_64"
   repositories:
-    - { name: "Red Hat Satellite Capsule 6.15 for RHEL 8 x86_64 RPMs", product: "Red Hat Satellite Capsule" }
-    - { name: "Red Hat Satellite Maintenance 6.15 for RHEL 8 x86_64 RPMs", product: "Red Hat Enterprise Linux for x86_64" }
+    - { name: "Red Hat Satellite Capsule 6.16 for RHEL 9 x86_64 RPMs", product: "Red Hat Satellite Capsule" }
+    - { name: "Red Hat Satellite Maintenance 6.16 for RHEL 9 x86_64 RPMs", product: "Red Hat Enterprise Linux for x86_64" }
 
 # RHEL 8 latest
 - name: "cv_rhel8_latest_x86_64"
@@ -340,6 +340,7 @@ content_views:
     - { name: 'Red Hat Enterprise Linux 9 for x86_64 - AppStream Kickstart 9.4', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Enterprise Linux 9 for x86_64 - AppStream RPMs 9', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Satellite Client 6 for RHEL 9 x86_64 RPMs', product: 'Red Hat Enterprise Linux for x86_64' }
 
 # Define Composite content views
 ccv:
