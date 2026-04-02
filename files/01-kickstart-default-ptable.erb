@@ -10,7 +10,7 @@ oses:
 zerombr
 clearpart --all --initlabel
 
-part /boot      --fstype ext2 --size=512 --ondisk=vda
+part /boot      --fstype ext4 --size=2048 --ondisk=vda
 part pv.0       --size=1 --grow --ondisk=vda
 
 volgroup vg_<%= @host.shortname%> pv.0

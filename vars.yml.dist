@@ -154,11 +154,11 @@ redhat_kickstart_repos:
 
 - label: "rhel-9-for-x86_64-baseos-kickstart"
   repos:
-  - { releasever: "9.4" }
+  - { releasever: "9.6" }
 
 - label: "rhel-9-for-x86_64-appstream-kickstart"
   repos:
-  - { releasever: "9.4" }
+  - { releasever: "9.6" }
 
 redhat_os_repos:
 - label: "rhel-7-server-rpms"
@@ -212,11 +212,11 @@ redhat_os_repos:
     - { }
 
 # RHEL 8 Capsule stuff
-- label: "satellite-capsule-6.16-for-rhel-9-x86_64-rpms"
+- label: "satellite-capsule-6.18-for-rhel-9-x86_64-rpms"
   repos:
     - { }
 
-- label: "satellite-maintenance-6.16-for-rhel-9-x86_64-rpms"
+- label: "satellite-maintenance-6.18-for-rhel-9-x86_64-rpms"
   repos:
     - { }
 
@@ -235,29 +235,25 @@ redhat_os_repos:
 
 # Update Services for SAP Solutions (e4s)
 
-- label: "rhel-8-for-x86_64-baseos-e4s-rpms"
-  repos:
-    - { releasever: "8.0" }
-
 - label: "rhel-8-for-x86_64-appstream-e4s-rpms"
   repos:
-    - { releasever: "8.8" }
+    - { releasever: "8.10" }
 
 - label: "rhel-8-for-x86_64-highavailability-e4s-rpms"
   repos:
-    - { releasever: "8.8" }
+    - { releasever: "8.10" }
 
 - label: "rhel-8-for-x86_64-sap-netweaver-e4s-rpms"
   repos:
-    - { releasever: "8.8" }
+    - { releasever: "8.10" }
 
 - label: "rhel-8-for-x86_64-sap-solutions-e4s-rpms"
   repos:
-    - { releasever: "8.8" }
+    - { releasever: "8.10" }
 
 - label: "satellite-client-6-for-rhel-8-x86_64-e4s-rpms"
   repos:
-    - { releasever: "8.8" }
+    - { releasever: "8.10" }
 
 # Define an interval for the sync plan
 sync_plan: daily
@@ -310,14 +306,14 @@ content_views:
 # The stuff needed for a Satellite Capsule 6.13 RHEL9
 - name: "cv_capsule_x86_64"
   repositories:
-    - { name: "Red Hat Satellite Capsule 6.16 for RHEL 9 x86_64 RPMs", product: "Red Hat Satellite Capsule" }
-    - { name: "Red Hat Satellite Maintenance 6.16 for RHEL 9 x86_64 RPMs", product: "Red Hat Enterprise Linux for x86_64" }
+    - { name: "Red Hat Satellite Capsule 6.18 for RHEL 9 x86_64 RPMs", product: "Red Hat Satellite Capsule" }
+    - { name: "Red Hat Satellite Maintenance 6.18 for RHEL 9 x86_64 RPMs", product: "Red Hat Enterprise Linux for x86_64" }
 
 # RHEL 8 latest
 - name: "cv_rhel8_latest_x86_64"
   repositories:
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS Kickstart 8.10', product: 'Red Hat Enterprise Linux for x86_64' }
-    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream Kickstart 8.6', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream Kickstart 8.10', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS RPMs 8', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Enterprise Linux 8 for x86_64 - AppStream RPMs 8', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Satellite Client 6 for RHEL 8 x86_64 RPMs', product: 'Red Hat Enterprise Linux for x86_64' }
@@ -336,8 +332,8 @@ content_views:
 # RHEL 9 latest
 - name: "cv_rhel9_latest_x86_64"
   repositories:
-    - { name: 'Red Hat Enterprise Linux 9 for x86_64 - BaseOS Kickstart 9.4', product: 'Red Hat Enterprise Linux for x86_64' }
-    - { name: 'Red Hat Enterprise Linux 9 for x86_64 - AppStream Kickstart 9.4', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Enterprise Linux 9 for x86_64 - BaseOS Kickstart 9.6', product: 'Red Hat Enterprise Linux for x86_64' }
+    - { name: 'Red Hat Enterprise Linux 9 for x86_64 - AppStream Kickstart 9.6', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Enterprise Linux 9 for x86_64 - AppStream RPMs 9', product: 'Red Hat Enterprise Linux for x86_64' }
     - { name: 'Red Hat Satellite Client 6 for RHEL 9 x86_64 RPMs', product: 'Red Hat Enterprise Linux for x86_64' }
@@ -386,7 +382,7 @@ hostgroups:
   parent: "BER/prod/sap"
   locations: "BER"
   architecture: "x86_64"
-  operatingsystem: "RHEL 8.6"
+  operatingsystem: "RHEL 8.10"
   ptable: 01-kickstart-default
   lifecycle_environment: prod
   content_source: "{{ sat_hostname }}"
@@ -417,7 +413,7 @@ hostgroups:
   parent: "BER/prod/generic"
   location: "BER"
   architecture: x86_64
-  operatingsystem: "RedHat 9.4"
+  operatingsystem: "RedHat 9.6"
   ptable: 01-kickstart-default
   lifecycle_environment: prod
   content_view: "ccv_rhel9_latest_x86_64"
